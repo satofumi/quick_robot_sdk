@@ -11,6 +11,7 @@
 */
 
 #include <memory>
+#include <string>
 #include <vector>
 
 
@@ -42,6 +43,8 @@ namespace qrk
 
         Urg_driver(void);
         ~Urg_driver(void);
+
+        static std::vector<std::string> find_ports(void);
 
         const char* what(void) const;
 

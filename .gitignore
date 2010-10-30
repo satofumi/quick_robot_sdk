@@ -1,0 +1,17 @@
+*.o
+*.a
+*~
+*.lo
+*.la
+*.Po
+find_port
+autom4te.cache
+config.log
+.deps
+.libs
+get_distance
+get_distance_intensity
+get_multiecho
+get_multiecho_intensity
+sensor_parameter
+sync_time_stamp

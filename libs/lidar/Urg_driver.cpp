@@ -12,10 +12,10 @@
 extern "C" {
 #include "urg_sensor.h"
 #include "urg_utils.h"
+#include "urg_serial_utils.h"
 #include "urg_errno.h"
 }
-
-#include <stdio.h>
+#include <cstdio>
 
 using namespace qrk;
 using namespace std;
@@ -54,6 +54,18 @@ Urg_driver::~Urg_driver(void)
     if (pimpl->is_opened_) {
         close();
     }
+}
+
+
+std::vector<std::string> Urg_driver::find_ports(void)
+{
+    vector<string> found_ports;
+
+    int n = urg_serial_find_port();
+    for (int i = 0; i < n; ++i) {
+        found_ports.push_back(urg_serial_port_name(i));
+    }
+    return found_ports;
 }
 
 
