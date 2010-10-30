@@ -1,0 +1,1 @@
+../../../libs/lidar/samples/sensor_parameter.cpp

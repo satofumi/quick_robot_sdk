@@ -1,0 +1,1 @@
+../../../libs/lidar/samples/sync_time_stamp.cpp

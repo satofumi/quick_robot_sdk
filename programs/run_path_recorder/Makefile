@@ -1,0 +1,5 @@
+# ice/
+
+all :
+
+clean :

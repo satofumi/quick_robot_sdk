@@ -1,0 +1,44 @@
+/*!
+  \page controller_protocol_page 通信プロトコル (記述中)
+
+  !!!
+
+
+  \section controller_protocol_position 位置情報の取得 (記述中)
+
+  !!!
+
+
+  \section controller_protocol_path 走行経路の指示 (記述中)
+
+
+  !!!
+
+
+  \section controller_protocol_velocity 移動速度の指示 (記述中)
+
+  !!!
+
+
+  \section controller_protocol_parameter パラメータの設定と取得 (記述中)
+
+  !!!
+
+
+  \section controller_protocol_wheel 車輪の直接制御 (記述中)
+
+  - 送信
+  - "WV" (Wheel Velocity)
+    - id (1 [byte], hex)
+      - !!!
+    - velocity (4 [byte], hex)
+      - !!!
+
+  - 受信
+  - "WV"
+    - status (1 [byte], decimal)
+      - !!!
+      - 0 ... 正常
+      - 1 ... エラー
+      - 2 ... ID 範囲外
+*/
