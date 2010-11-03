@@ -45,6 +45,8 @@ namespace qrk
         ~Urg_driver(void);
 
         static std::vector<std::string> find_ports(void);
+        static std::vector<std::string> find_ports(std::vector<int>&
+                                                   is_urg_ports);
 
         const char* what(void) const;
 

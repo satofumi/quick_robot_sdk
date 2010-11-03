@@ -59,11 +59,20 @@ Urg_driver::~Urg_driver(void)
 
 std::vector<std::string> Urg_driver::find_ports(void)
 {
+    vector<int> dummy_is_urg_port;
+    return find_ports(dummy_is_urg_port);
+}
+
+
+std::vector<std::string> Urg_driver::find_ports(std::vector<int>& is_urg_ports)
+{
     vector<string> found_ports;
 
+    is_urg_ports.clear();
     int n = urg_serial_find_port();
     for (int i = 0; i < n; ++i) {
         found_ports.push_back(urg_serial_port_name(i));
+        is_urg_ports.push_back(urg_serial_is_urg_port(i));
     }
     return found_ports;
 }

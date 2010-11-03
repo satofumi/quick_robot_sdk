@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
         long time_stamp;
         vector<long> data;
         urg.get_distance(data, &time_stamp);
-
         cout << ticks() << " " << time_stamp << endl;
     }
 }

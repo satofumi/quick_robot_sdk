@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    // データは１ステップのみ取得する
     int min_step = urg.min_step();
     urg.set_scanning_parameter(min_step, min_step);
 
