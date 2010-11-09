@@ -16,6 +16,9 @@ generated_html
 autom4te.cache
 
 config.log
+config.status
+packages/urg_cpp_library/src/Makefile
+packages/urg_cpp_library/sample/Makefile
 
 get_distance
 get_distance_intensity

@@ -660,6 +660,16 @@ uninstall-am: uninstall-binSCRIPTS
 	ps ps-am tags tags-recursive uninstall uninstall-am \
 	uninstall-binSCRIPTS
 
+
+$(PACKAGE)-$(VERSION).tar.gz: dist
+
+zip: $(PACKAGE)-$(VERSION).tar.gz
+	$(RM) -rf $(PACKAGE)-$(VERSION)
+	tar zxf $(PACKAGE)-$(VERSION).tar.gz
+	find $(PACKAGE)-$(VERSION) -name '*.[ch]*' | xargs nkf -s --overwrite
+	zip -r $(PACKAGE)-$(VERSION).zip $(PACKAGE)-$(VERSION)/
+	$(RM) -rf $(PACKAGE)-$(VERSION)
+	$(RM) $(PACKAGE)-$(VERSION).tar.gz
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -23,8 +23,9 @@ TARGET = \
 	motor_velocity_run.mot \
 	encoder_print.mot \
 	wheel_velocity_run.mot \
-	sci_interrupt_write.mot sci_interrupt_write.rom \
-	sci_interrupt_echoback.mot sci_interrupt_echoback.rom \
+	sci_interrupt_write.mot \
+	sci_interrupt_echoback.mot \
+	motor_table_record.mot \
 
 all : $(TARGET)
 
@@ -43,11 +44,12 @@ sci_echoback.mot : sci_echoback.o $(BASE_OBJ) $(SOURCE_DIR)/sci_read_write.o
 timer_1sec.mot timer_1sec.dis : timer_1sec.o $(BASE_OBJ) $(SOURCE_DIR)/timer_control.o itoa.o $(SOURCE_DIR)/std_string.o $(SOURCE_DIR)/sci_read_write.o
 encoder_print.mot : encoder_print.o $(BASE_OBJ) $(SOURCE_DIR)/sci_utilities.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/sci_read_write.o $(SOURCE_DIR)/mtu2_initialize.o $(SOURCE_DIR)/motor_pwm.o
 motor_pwm_out.mot : motor_pwm_out.o $(BASE_OBJ) $(SOURCE_DIR)/motor_pwm.o $(SOURCE_DIR)/mtu2_initialize.o
-motor_velocity_run.mot : motor_velocity_run.o $(BASE_OBJ) $(SOURCE_DIR)/timer_control.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/motor_pwm.o $(SOURCE_DIR)/motor_velocity.o $(SOURCE_DIR)/mtu2_initialize.o
+motor_velocity_run.mot : motor_velocity_run.o $(BASE_OBJ) $(SOURCE_DIR)/timer_control.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/motor_table_pwm.o $(SOURCE_DIR)/motor_pwm.o $(SOURCE_DIR)/motor_velocity.o $(SOURCE_DIR)/mtu2_initialize.o
 pwm_output.mot : pwm_output.o $(SOURCE_DIR)/pwm_control.o
-wheel_velocity_run.mot : wheel_velocity_run.o $(BASE_OBJ) $(SOURCE_DIR)/wheel_velocity.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/motor_velocity.o $(SOURCE_DIR)/mtu2_initialize.o $(SOURCE_DIR)/motor_pwm.o $(SOURCE_DIR)/timer_control.o
+wheel_velocity_run.mot : wheel_velocity_run.o $(BASE_OBJ) $(SOURCE_DIR)/wheel_velocity.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/motor_velocity.o $(SOURCE_DIR)/mtu2_initialize.o $(SOURCE_DIR)/motor_pwm.o $(SOURCE_DIR)/timer_control.o $(SOURCE_DIR)/motor_table_pwm.o
 sci_interrupt_write.mot sci_interrupt_write.rom : sci_interrupt_write.o $(BASE_OBJ) $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/sci_utilities.o $(SOURCE_DIR)/ring_buffer.o
 sci_interrupt_echoback.mot sci_interrupt_echoback.rom : sci_interrupt_echoback.o $(BASE_OBJ) $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/ring_buffer.o
+motor_table_record.mot : motor_table_record.o $(BASE_OBJ) $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/ring_buffer.o $(SOURCE_DIR)/sci_utilities.o $(SOURCE_DIR)/motor_pwm.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/mtu2_initialize.o
 
 # DO NOT DELETE
 

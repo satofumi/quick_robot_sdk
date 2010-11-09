@@ -59,6 +59,7 @@
           - \subpage body_handler_h_page
           - \subpage wheel_velocity_h_page
             - \subpage motor_velocity_h_page
+            - \subpage motor_table_pwm_h_page
             - \subpage motor_pwm_h_page
               - \subpage motor_pwm_c_page
             - \subpage encoder_control_h_page

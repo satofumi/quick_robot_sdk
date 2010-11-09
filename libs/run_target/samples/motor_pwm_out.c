@@ -13,7 +13,7 @@
 int main(void)
 {
     enum {
-        DUTY = 255 * 70 / 100,
+        DUTY = 255 * 50 / 100,
     };
     int i;
 

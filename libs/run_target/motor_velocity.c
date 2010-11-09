@@ -9,7 +9,7 @@
 
 #include "motor_velocity.h"
 #include "robot_parameter.h"
-#include "motor_pwm.h"
+#include "motor_table_pwm.h"
 #include "encoder_reader.h"
 
 enum {
@@ -20,7 +20,7 @@ enum {
 
 void motor_velocity_initialize(motor_t *motor, int device_id)
 {
-    motor_pwm_initialize(device_id);
+    motor_table_pwm_initialize(device_id);
 
     motor->device_id = device_id;
     motor->total_diff = 0;
@@ -74,5 +74,5 @@ void motor_velocity_control(motor_t *motor,
     }
 #endif
 
-    motor_pwm_set_duty(motor->device_id, direction, output);
+    motor_table_pwm_set_duty(motor->device_id, direction, output);
 }

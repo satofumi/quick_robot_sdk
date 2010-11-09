@@ -28,7 +28,7 @@ depend :
 
 .PHONY : all clean html upload
 ######################################################################
-run_drive.mot run_drive.rom run_drive.dis : run_drive.o setup_state.o control_state.o pause_state.o clock_initialize.o imask.o run_system.o connection.o connection_utilities.o protocol_handler.o sci_interrupt_read_write.o emergency_io_control.o timer_control.o path_follow.o position_handler.o velocity_handler.o body_handler.o wheel_velocity.o motor_velocity.o motor_pwm.o encoder_reader.o odometry_calculate.o mtu2_initialize.o ring_buffer.o run_commands.o htoi.o
+run_drive.mot run_drive.rom run_drive.dis : run_drive.o setup_state.o control_state.o pause_state.o clock_initialize.o imask.o run_system.o connection.o connection_utilities.o protocol_handler.o sci_interrupt_read_write.o emergency_io_control.o timer_control.o path_follow.o position_handler.o velocity_handler.o body_handler.o wheel_velocity.o motor_velocity.o motor_table_pwm.o motor_pwm.o encoder_reader.o odometry_calculate.o mtu2_initialize.o ring_buffer.o run_commands.o htoi.o
 
 # DO NOT DELETE
 
