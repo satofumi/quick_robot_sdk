@@ -4,12 +4,12 @@ CC = $(CXX)
 CXXFLAGS = -g -O0 -Wall -Werror $(INCLUDES)
 INCLUDES = -I..
 
-TARGET = wheel_velocity_test
+TARGET = wheel_velocity_test motor_table_pwm_test
 
 all : $(TARGET) test
 
 clean :
-	$(RM) $(TARGET) *.o
+	$(RM) $(TARGET) *.o all_test
 
 depend :
 	makedepend -Y -- $(INCLUDES) -- $(wildcard *.h *.cpp)
@@ -19,6 +19,12 @@ test : all_test
 
 ######################################################################
 TEST_OBJS = all_test.o Connection_utilities_test.o connection_dummy.o connection_utilities.o std_string.o Run_commands_test.o protocol_handler.o run_commands.o htoi.o
+
+motor_table_pwm_test : motor_table_pwm.o
+
+motor_table_pwm.o : ../motor_table_pwm.c
+	$(CXX) $(CXXFLAAGS) $< -c -o $@
+
 
 all_test : $(TEST_OBJS)
 	$(CXX) $(CXXFLAGS) $(TEST_OBJS) -o $@ `cppunit-config --libs` $(TEST_LDLIBS)
@@ -52,6 +58,7 @@ Run_commands_test.o: ../protocol_handler.h ../run_t.h ../controller_config.h
 Run_commands_test.o: ../run_system_t.h ../odometry_t.h ../path_t.h
 Run_commands_test.o: ../wheel_t.h ../encoder_t.h ../motor_t.h
 connection_dummy.o: ../connection.h
+motor_table_pwm_test.o: ../motor_pwm.h ../motor_table_pwm.h
 wheel_velocity_test.o: ../wheel_velocity.c ../wheel_velocity.h ../wheel_t.h
 wheel_velocity_test.o: ../encoder_t.h ../motor_t.h ../robot_parameter.h
 wheel_velocity_test.o: ../encoder_reader.h ../motor_velocity.h ../motor_pwm.h

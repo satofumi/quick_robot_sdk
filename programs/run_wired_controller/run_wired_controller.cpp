@@ -32,9 +32,9 @@ using namespace std;
 namespace
 {
     enum Velocity {
-        Normal_velocity = 500,  // [mm/sec]
+        Normal_velocity = 300,  // [mm/sec]
         Slow_velocity = 100,    // [mm/sec]
-        Rotate_velocity = 250,   // [mm/sec]
+        Rotate_velocity = 300,  // [mm/sec]
     };
 
     enum Buttons {
@@ -85,10 +85,10 @@ namespace
     {
         enum { Threahold_value = 16384 };
         if (x_axis_value < -Threahold_value) {
-            return -Rotate_velocity;
+            return +Rotate_velocity;
 
         } else if (x_axis_value > +Threahold_value) {
-            return +Rotate_velocity;
+            return -Rotate_velocity;
         }
         return 0;
     }
@@ -100,8 +100,8 @@ namespace
         long left_wheel_velocity = straight_velocity + (rotate_velocity / 2);
         long right_wheel_velocity = straight_velocity - (rotate_velocity / 2);
 
-        robot_moving.set_wheel_velocity(0, left_wheel_velocity);
-        robot_moving.set_wheel_velocity(1, -right_wheel_velocity);
+        robot_moving.set_wheel_velocity(0, -left_wheel_velocity);
+        robot_moving.set_wheel_velocity(1, +right_wheel_velocity);
     }
 
 

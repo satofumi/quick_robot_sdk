@@ -4,9 +4,12 @@ ARCH = sh-elf
 SOURCE_DIR = .
 include $(SOURCE_DIR)/build_rule.mk
 
+RUBY = ruby
+
 CFLAGS_FOR_BUILD = -DHOST_COMPILE -O2 -m2 -Wall -Werror -W $(INCLUDES_FOR_BUILD)
 INCLUDES_FOR_BUILD =
 LDFLAGS_FOR_BUILD = -nostartfiles $(START_UP_FOR_BUILD)
+#LDLIBS_FOR_BUILD = -lgcc-Os-4-200
 LDLIBS_FOR_BUILD =
 
 START_UP_FOR_BUILD = $(SOURCE_DIR)/crt0.S
@@ -14,7 +17,10 @@ LD_LOAD_FOR_BUILD = $(SOURCE_DIR)/aki_sh7125_load.x
 LD_ROM_FOR_BUILD = $(SOURCE_DIR)/aki_sh7125_rom.x
 
 
-TARGET = run_drive.mot run_drive.rom run_drive.dis
+TARGET = \
+	isin_icos.h isin_icos.c \
+	run_drive.mot run_drive.rom run_drive.dis \
+
 all : $(TARGET)
 
 clean :
@@ -28,7 +34,21 @@ depend :
 
 .PHONY : all clean html upload
 ######################################################################
-run_drive.mot run_drive.rom run_drive.dis : run_drive.o setup_state.o control_state.o pause_state.o clock_initialize.o imask.o run_system.o connection.o connection_utilities.o protocol_handler.o sci_interrupt_read_write.o emergency_io_control.o timer_control.o path_follow.o position_handler.o velocity_handler.o body_handler.o wheel_velocity.o motor_velocity.o motor_table_pwm.o motor_pwm.o encoder_reader.o odometry_calculate.o mtu2_initialize.o ring_buffer.o run_commands.o htoi.o
+run_drive.mot run_drive.rom run_drive.dis : run_drive.o setup_state.o control_state.o pause_state.o clock_initialize.o imask.o run_system.o connection.o connection_utilities.o protocol_handler.o sci_interrupt_read_write.o emergency_io_control.o timer_control.o path_follow.o position_handler.o velocity_handler.o body_handler.o wheel_velocity.o motor_velocity.o motor_table_pwm.o motor_pwm.o encoder_reader.o odometry_calculate.o mtu2_initialize.o ring_buffer.o run_commands.o htoi.o isin_icos.o #iatan2.o
+
+isin_icos.c : create_isin_icos.rb
+	$(RUBY) $< > $@ || $(RM) $@
+
+isin_icos.h : create_isin_icos.rb
+	$(RUBY) $< header > $@ || $(RM) $@
+
+isin_icos.o : isin_icos.h
+
+iatan2.c : create_iatan2.rb
+	$(RUBY) $< > $@ || $(RM) $@
+
+iatan2.o : iatan2.h
+
 
 # DO NOT DELETE
 
@@ -36,6 +56,7 @@ body_handler.o: wheel_t.h encoder_t.h motor_t.h
 control_state.o: run_t.h controller_config.h run_system_t.h odometry_t.h
 control_state.o: path_t.h wheel_t.h encoder_t.h motor_t.h
 encoder_reader.o: encoder_t.h
+motor_table_pwm.o: motor_pwm.h
 motor_velocity.o: motor_t.h
 odometry_calculate.o: odometry_t.h
 path_follow.o: path_t.h
@@ -66,12 +87,16 @@ control_state.o: wheel_velocity.h
 emergency_io_control.o: emergency_io_control.h
 encoder_reader.o: encoder_reader.h encoder_t.h mtu2_initialize.h
 htoi.o: htoi.h
+iatan2.o: iatan2.h
 imask.o: imask.h
+isin_icos.o: isin_icos.h
 motor_pwm.o: motor_pwm.h mtu2_initialize.h
-motor_velocity.o: motor_velocity.h motor_t.h robot_parameter.h motor_pwm.h
-motor_velocity.o: encoder_reader.h encoder_t.h
+motor_table_pwm.o: motor_table_pwm.h motor_pwm.h
+motor_velocity.o: motor_velocity.h motor_t.h robot_parameter.h
+motor_velocity.o: motor_table_pwm.h motor_pwm.h encoder_reader.h encoder_t.h
 mtu2_initialize.o: mtu2_initialize.h
-odometry_calculate.o: odometry_calculate.h odometry_t.h
+odometry_calculate.o: odometry_calculate.h odometry_t.h robot_parameter.h
+odometry_calculate.o: controller_config.h isin_icos.h
 path_follow.o: path_t.h position_handler.h
 pause_state.o: pause_state.h run_t.h controller_config.h run_system_t.h
 pause_state.o: odometry_t.h path_t.h wheel_t.h encoder_t.h motor_t.h

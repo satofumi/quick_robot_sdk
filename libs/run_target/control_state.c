@@ -5,6 +5,8 @@
   \author Satofumi KAMIMURA
 
   $Id: control_state.c 1927 2010-09-26 23:09:26Z satofumi $
+
+  \todo モータ回転と取り付けの関係を調整できるようにする。
 */
 
 #include "control_state.h"
@@ -55,7 +57,7 @@ static void control_task(void)
     // 推定自己位置の更新
     left_encoder_count = encoder_difference(&run_->wheel[LEFT_WHEEL].encoder);
     right_encoder_count = encoder_difference(&run_->wheel[RIGHT_WHEEL].encoder);
-    odometry_update(&run_->odometry, left_encoder_count, right_encoder_count);
+    odometry_update(&run_->odometry, -right_encoder_count, +left_encoder_count);
 
     // 走行経路の指示
     switch (run_->run_system.mode) {

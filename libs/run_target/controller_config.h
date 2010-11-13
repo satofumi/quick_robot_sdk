@@ -1,5 +1,5 @@
-#ifndef QRK_TAIYAKI_DRIVE_H
-#define QRK_TAIYAKI_DRIVE_H
+#ifndef QRK_CONTROLLER_CONFIG_H
+#define QRK_CONTROLLER_CONFIG_H
 
 /*!
   \file
@@ -18,4 +18,4 @@ enum {
     LEFT_WHEEL = 1,
 };
 
-#endif /* !QRK_TAIYAKI_DRIVE_H */
+#endif /* !QRK_CONTROLLER_CONFIG_H */

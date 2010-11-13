@@ -43,7 +43,7 @@ static void timer_handler(void)
 int main(void)
 {
     enum {
-        VELOCITY_MM_PER_SEC = 100,
+        VELOCITY_MM_PER_SEC = 300,
     };
     int i;
 

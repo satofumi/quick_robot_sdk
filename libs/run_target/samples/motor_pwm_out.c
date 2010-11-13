@@ -13,7 +13,7 @@
 int main(void)
 {
     enum {
-        DUTY = 255 * 50 / 100,
+        DUTY = 255 * 30 / 100,
     };
     int i;
 
@@ -23,7 +23,14 @@ int main(void)
         motor_pwm_initialize(i);
     }
     motor_pwm_set_duty(0, MOTOR_PWM_CW, DUTY);
-    motor_pwm_set_duty(1, MOTOR_PWM_CCW, DUTY);
+    motor_pwm_set_duty(1, MOTOR_PWM_CW, DUTY);
+
+#if 0
+    for (i = 0; i < 2; ++i) {
+        motor_pwm_set_duty(i, MOTOR_PWM_CCW, 254);
+        motor_pwm_set_duty(i, MOTOR_PWM_CCW, 0);
+    }
+#endif
 
     while (1) {
         ;

@@ -11,11 +11,30 @@
 */
 
 
+enum {
+    NUMBER_OF_AXIS = 2,
+    X_AXIS = 0,
+    Y_AXIS = 1,
+};
+
+
 //! 推定自己位置の管理
 typedef struct
 {
-    unsigned char dummy;
+    // 向き情報
+    long direction_count;
+    unsigned short direction;
+
+    // 位置情報
+    long xy_count[NUMBER_OF_AXIS];
+    long mm[NUMBER_OF_AXIS];
+    long m[NUMBER_OF_AXIS];
+    long km[NUMBER_OF_AXIS];
+
+    // 速度情報
+    long straight_velocity;
     // !!!
+
 } odometry_t;
 
 #endif /* !QRK_ODOMETRY_T_H */

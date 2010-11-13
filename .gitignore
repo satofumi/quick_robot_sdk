@@ -32,3 +32,11 @@ find_port
 usb_joystick_view
 run_wired_controller
 urg_auto_recorder
+all_test
+wheel_velocity_test
+motor_table_pwm_test
+
+*/run_target/iatan2.c
+*/run_target/iatan2.h
+*/run_target/isin_icos.h
+*/run_target/isin_icos.c

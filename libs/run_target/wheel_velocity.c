@@ -15,6 +15,11 @@
 #include <math.h>
 
 
+enum {
+    POINT_SHIFT_WIDTH = 10,     //!< 固定小数点のビット幅
+};
+
+
 void wheel_initialize(wheel_t *wheel, int device_id)
 {
     encoder_initialize(&wheel->encoder, device_id);
@@ -34,7 +39,8 @@ void wheel_set_velocity(wheel_t *wheel, int mm_per_sec)
 static int mm2count_velocity(int mm)
 {
     int count_per_msec =
-        (((mm * ENCODER_RESOLUTION) >> (10 - CONTROL_CYCLE_MSEC_SHIFT))
+        (((mm * ENCODER_RESOLUTION) >>
+          (POINT_SHIFT_WIDTH - CONTROL_CYCLE_MSEC_SHIFT))
          / (int)(2 * M_PI * WHEEL_RADIUS_MM));
 
     return count_per_msec;
@@ -45,7 +51,8 @@ static int count2mm_velocity(int count)
 {
     int mm_per_sec =
         count * (int)(2 * M_PI *
-                      (WHEEL_RADIUS_MM << (10 - CONTROL_CYCLE_MSEC_SHIFT)))
+                      (WHEEL_RADIUS_MM <<
+                       (POINT_SHIFT_WIDTH - CONTROL_CYCLE_MSEC_SHIFT)))
         / ENCODER_RESOLUTION;
 
     return mm_per_sec;

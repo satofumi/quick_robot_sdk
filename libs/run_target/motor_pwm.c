@@ -48,6 +48,11 @@ typedef enum {
 } io_state_t;
 
 
+enum {
+    MAX_DUTY = 255,
+};
+
+
 static void set_pe8(io_state_t state)
 {
     PFC.PECRL3.WORD &= ~0x0007;
@@ -128,11 +133,11 @@ static void set_cw(int device_id, unsigned char duty)
 {
     if (device_id == 0) {
         set_pe8(HI);
-        set_pe10_pwm(255 - duty);
+        set_pe10_pwm(MAX_DUTY - duty);
 
     } else if (device_id == 1) {
         set_pe12(HI);
-        set_pe14_pwm(255 - duty);
+        set_pe14_pwm(MAX_DUTY - duty);
     }
 }
 
@@ -141,11 +146,11 @@ static void set_ccw(int device_id, unsigned char duty)
 {
     if (device_id == 0) {
         set_pe10(HI);
-        set_pe8_pwm(255 - duty);
+        set_pe8_pwm(MAX_DUTY - duty);
 
     } else if (device_id == 1) {
         set_pe14(HI);
-        set_pe12_pwm(255 - duty);
+        set_pe12_pwm(MAX_DUTY - duty);
     }
 }
 

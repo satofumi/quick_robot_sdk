@@ -13,8 +13,10 @@
 #include "encoder_reader.h"
 
 enum {
-    DEFAULT_GAIN_P = 32,        /* 1/1 の重さ */
+    DEFAULT_GAIN_P = 48,        /* 1/1 の重さ */
     DEFAULT_GAIN_I = 32,        /* 1/256 の重さ */
+    I_REDUCE_VALUE = 16,
+    GAIN_I_SHIFT = 8,
 };
 
 
@@ -35,7 +37,7 @@ void motor_velocity_control(motor_t *motor,
 {
     enum {
         ENCODER_MAX = 100,   // １回のエンコーダ変位の想定される最大値
-        TOTAL_DIFF_MAX = 32767 - ENCODER_MAX, // I 項の積分の最大値
+        TOTAL_DIFF_MAX = (32767 >> 2) - ENCODER_MAX, // I 項の積分の最大値
     };
     long diff;
     long total_diff = motor->total_diff;
@@ -44,10 +46,11 @@ void motor_velocity_control(motor_t *motor,
 
     // PI 制御
     diff = target_count_velocity - actual_count_velocity;
-    output = (motor->gain_p * diff) + (motor->gain_i * (total_diff >> 8));
     total_diff += diff;
+    output =
+        (motor->gain_p * diff) + (motor->gain_i * (total_diff >> GAIN_I_SHIFT));
 
-    if (total_diff > TOTAL_DIFF_MAX) {
+    if (total_diff > +TOTAL_DIFF_MAX) {
         total_diff = TOTAL_DIFF_MAX;
     } else if (total_diff < -TOTAL_DIFF_MAX) {
         total_diff = -TOTAL_DIFF_MAX;
@@ -61,18 +64,11 @@ void motor_velocity_control(motor_t *motor,
         direction = MOTOR_PWM_CCW;
     }
 
-    if (output > 256) {
+    if (output >= 255) {
         output = 255;
     } else if (output < 0) {
         output = 0;
     }
-
-#if 0
-    // !!! リミットを付加
-    if (output > 153) {
-        output = 153;
-    }
-#endif
 
     motor_table_pwm_set_duty(motor->device_id, direction, output);
 }
