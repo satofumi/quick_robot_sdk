@@ -29,13 +29,13 @@ sensor_parameter
 sync_time_stamp
 calculate_xy
 evaluate_timestamp
-find_port
-usb_joystick_view
-run_wired_controller
-urg_auto_recorder
+libs/lidar/samples/find_port
+libs/controller/samples/usb_joystick_view
+programs/run_wired_controller/run_wired_controller
+*/urg_auto_recorder/urg_auto_recorder
 all_test
-wheel_velocity_test
-motor_table_pwm_test
+libs/run_target/test/wheel_velocity_test
+libs/run_target/test/motor_table_pwm_test
 
 */run_target/iatan2.c
 */run_target/iatan2.h
