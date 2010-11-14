@@ -12,7 +12,8 @@ divid_max = 1 << divid_shift
 angle_quad = angle_div >> 2
 
 # 分割具合の設定 (0で誤差なし)
-table_shift_value = 7
+#table_shift_value = 7
+table_shift_value = 2
 #table_shift_value = 0
 
 if ARGV[0] == "header"

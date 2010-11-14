@@ -144,7 +144,6 @@ struct Usb_joystick::pImpl : private Usb_joystick_initialize
 
     void axis_event_handler(SDL_JoyAxisEvent& event)
     {
-        fprintf(stderr, "%d, %d\n", event.axis, event.value);
         joysticks_->events_[event.which].axis_value_[event.axis] = event.value;
     }
 

@@ -105,6 +105,15 @@ namespace
     }
 
 
+    void print_robot_position(Run_driver& robot_moving)
+    {
+        Position<long> position = robot_moving.position();
+
+        cout << position.x << " " << position.y << " " << position.to_deg()
+             << endl;
+    }
+
+
     void control_by_joystick(Run_driver& robot_moving, Usb_joystick& joystick)
     {
         bool quit = false;
@@ -137,6 +146,9 @@ namespace
             // 各輪の速度を計算して指示
             set_robot_velocity(robot_moving,
                                straight_velocity, rotate_velocity);
+
+            // 現在位置を出力
+            print_robot_position(robot_moving);
 
             SDL_Delay(100);
         }

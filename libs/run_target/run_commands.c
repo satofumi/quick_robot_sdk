@@ -9,8 +9,33 @@
 
 #include "run_commands.h"
 #include "htoi.h"
+#include "itoh.h"
 #include "wheel_velocity.h"
 #include "connection.h"
+
+
+void handle_OP_command(const run_t *run)
+{
+    enum {
+        DATA_FIRST = 4,
+    };
+    char response[] = "OP0\nxxxxxxxxyyyyyyyydddd\n";
+    char *p = &response[DATA_FIRST];
+    const odometry_t *odometry = &run->odometry;
+    int i;
+
+    // 応答を返す
+    for (i = 0; i < NUMBER_OF_AXIS; ++i) {
+        long mm =
+            1000 * ((1000 * odometry->km[i]) + odometry->m[i]) +
+            odometry->mm[i];
+        itoh(p, mm, 4);
+        p += 8;
+    }
+    itoh(p, run->odometry.direction, 2);
+
+    connection_write(response, 25);
+}
 
 
 void handle_WV_command(run_t *run, const char *line_buffer)

@@ -6,6 +6,18 @@
 
   \section controller_protocol_position 位置情報の取得 (記述中)
 
+  - 送信
+  - "OP" (Odometry Position)
+
+  - 受信
+  - "OP"
+    - status (1 [byte], ascii decimal)
+      - 0 ... 正常
+      - 0 以外 ... エラー
+    - position
+      - x_mm (8 [byte], ascii hex)
+      - y_mm (8 [byte], ascii hex)
+      - direction (4 [byte], ascii hex)
   !!!
 
 
@@ -22,6 +34,27 @@
 
   \section controller_protocol_parameter パラメータの設定と取得 (記述中)
 
+  \subsection パラメータの設定
+
+  - 送信
+  - "SP" (Set Parameter)
+    - id (1 [byte], hex)
+      - !!!
+    - value (8 [byte], ascii hex)
+      - !!!
+
+  - 受信
+  - "SP"
+    - status (1 [byte], ascii decimal)
+      - 0 ... 正常
+      - 0 以外 ... エラー
+
+
+  \subsection パラメータの取得
+
+  - 送信
+  - "GP" (Get Parameter)
+
   !!!
 
 
@@ -31,14 +64,12 @@
   - "WV" (Wheel Velocity)
     - id (1 [byte], hex)
       - !!!
-    - velocity (4 [byte], hex)
+    - velocity (4 [byte], ascii hex)
       - !!!
 
   - 受信
   - "WV"
-    - status (1 [byte], decimal)
-      - !!!
+    - status (1 [byte], ascii decimal)
       - 0 ... 正常
-      - 1 ... エラー
-      - 2 ... ID 範囲外
+      - 0 以外 ... エラー
 */

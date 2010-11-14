@@ -43,6 +43,7 @@
         - \subpage control_state_h_page
         - \subpage pause_state_h_page
           - \subpage emergency_io_control_h_page
+      - \subpage setting_upload_page
       \n \n
       - \subpage controller_protocol_page
         - \ref controller_protocol_position

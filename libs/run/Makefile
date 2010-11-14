@@ -2,7 +2,7 @@
 
 CXXFLAGS = -g -O0 -Wall -Werror -W $(INCLUDES) `urg_c-config --cflags`
 CFLAGS = $(CXXFLAGS)
-INCLUDES = -I../geometry
+INCLUDES = -I../geometry -I../math -I../system -I../run_target
 
 RUN_LIB = librun.a
 TARGET = $(RUN_LIB)
@@ -20,7 +20,11 @@ depend :
 ######################################################################
 $(RUN_LIB) : \
 	$(RUN_LIB)(c_run_driver.o) \
+	$(RUN_LIB)(htoi.o) \
 	$(RUN_LIB)(Run_driver.o) \
+
+htoi.o : ../run_target/htoi.c
+	$(CC) $(CFLAGS) $< -c -o $@
 
 # DO NOT DELETE
 

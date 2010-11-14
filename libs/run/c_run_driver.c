@@ -5,10 +5,15 @@
   \author Satofumi KAMIMURA
 
   $Id: c_run_driver.c 1927 2010-09-26 23:09:26Z satofumi $
+
+  \todo 数値をマクロにする。
 */
 
 #include "c_run_driver.h"
+#include "htoi.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 
 enum {
@@ -65,6 +70,53 @@ const char *run_driver_what(const run_driver_t *run)
 }
 
 
+int run_position(run_driver_t *run,
+                 long *x_mm, long *y_mm, unsigned short *direction)
+{
+    enum {
+        BUFFER_SIZE = 26,
+        SEND_SIZE = 3,
+        RECEIVE_SIZE = 25,
+        DATA_FIRST = 4,
+    };
+    char buffer[BUFFER_SIZE] = "OP0\nxxxxxxxxyyyyyyyydddd\n";
+    int n;
+
+    if (run_driver_is_open(run) != 0) {
+        // !!! エラーメッセージの更新
+        return -1;
+    }
+
+    // コマンドを送信
+    n = connection_write(&run->connection, "OP\n", SEND_SIZE);
+    if (n != SEND_SIZE) {
+        // !!! エラーメッセージの更新
+        return -1;
+    }
+
+    n = connection_read(&run->connection, buffer, RECEIVE_SIZE, run->timeout);
+    if (n != RECEIVE_SIZE) {
+        // !!! エラーメッセージの更新
+        return -1;
+    }
+
+    // 受信結果をデコード
+    char decode_buffer[9];
+    memcpy(decode_buffer, &buffer[DATA_FIRST], 8);
+    decode_buffer[8] = '\0';
+    *x_mm = htoi(decode_buffer, 8);
+
+    memcpy(decode_buffer, &buffer[DATA_FIRST + 8], 8);
+    *y_mm = htoi(decode_buffer, 8);
+
+    memcpy(decode_buffer, &buffer[DATA_FIRST + 8 + 8], 4);
+    decode_buffer[4] = '\0';
+    *direction = strtol(decode_buffer, NULL, 16);
+
+    return 0;
+}
+
+
 void run_stop_module(void)
 {
     // !!!
@@ -77,9 +129,14 @@ void run_resume_module(void)
 }
 
 
-int run_driver_set_wheel_velocity(run_driver_t *run,
-                                  int wheel_id, short mm_per_sec)
+int run_set_wheel_velocity(run_driver_t *run, int wheel_id, short mm_per_sec)
 {
+    enum {
+        BUFFER_SIZE = 9,
+        SEND_SIZE = 8,
+        RECEIVE_SIZE = 4,
+    };
+    char buffer[BUFFER_SIZE] = "WVivvvv\n";
     int n;
 
     // !!! wheel_id と mm_per_sec の範囲判定を行うべき
@@ -90,18 +147,13 @@ int run_driver_set_wheel_velocity(run_driver_t *run,
     }
 
     // コマンドを送信
-    enum {
-        BUFFER_SIZE = 9,
-        SEND_SIZE = 8,
-        RECEIVE_SIZE = 4,
-    };
-    char buffer[BUFFER_SIZE] = "WVivvvv\n";
-    snprintf(buffer, BUFFER_SIZE, "WV%d%04x\n", wheel_id, (unsigned short)mm_per_sec);
+    snprintf(buffer, BUFFER_SIZE, "WV%d%04x\n", wheel_id,
+             (unsigned short)mm_per_sec);
 
     buffer[SEND_SIZE - 1] = '\n';
 
     n = connection_write(&run->connection, buffer, SEND_SIZE);
-    if (n != BUFFER_SIZE) {
+    if (n != SEND_SIZE) {
         // !!! エラーメッセージの更新
         return -1;
     }

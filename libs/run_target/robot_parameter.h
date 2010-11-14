@@ -18,10 +18,10 @@ enum {
 
 
 #define ENCODER_RESOLUTION 400  //!< エンコーダ分解能 [1]
-#define WHEEL_RADIUS_MM 43      //!< 車輪の半径 [mm]
+#define WHEEL_RADIUS_MM 28      //!< 車輪の半径 [mm]
 #define GEAR_RATIO 1.0          //!< ギヤ比 (モータ軸/車輪軸) [1]
 
 // !!!
-#define TREAD 300               //!< トレッド [mm]
+#define TREAD 260               //!< トレッド [mm]
 
 #endif /* !QRK_ROBOT_PARAMETER_H */

@@ -18,7 +18,8 @@ extern int run_driver_is_open(run_driver_t *run);
 extern void run_driver_close(run_driver_t *run);
 extern const char *run_driver_what(const run_driver_t *run);
 
-//qrk::Position<long> position() const;
+extern int run_position(run_driver_t *run,
+                        long *x_mm, long *y_mm, unsigned short *direction);
 
 //bool set_path_line(const qrk::Position<long>& position,
 //long stop_length);
@@ -33,7 +34,7 @@ extern const char *run_driver_what(const run_driver_t *run);
 
 extern void run_stop_module(void);
 extern void run_resume_module(void);
-extern int run_driver_set_wheel_velocity(run_driver_t *run,
-                                         int wheel_id, short mm_per_sec);
+extern int run_set_wheel_velocity(run_driver_t *run,
+                                  int wheel_id, short mm_per_sec);
 
 #endif /* !QRK_C_RUN_DRIVER_H */

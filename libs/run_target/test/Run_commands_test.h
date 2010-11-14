@@ -17,11 +17,13 @@
 class Run_commands_test : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(Run_commands_test);
+    CPPUNIT_TEST(op_command_test);
     CPPUNIT_TEST(wv_command_test);
     CPPUNIT_TEST_SUITE_END();
 
 public:
     void setUp(void);
+    void op_command_test(void);
     void wv_command_test(void);
 };
 

@@ -11,6 +11,7 @@
 extern "C" {
 #include "c_run_driver.h"
 }
+#include "math_utilities.h"
 #include <string>
 
 using namespace qrk;
@@ -63,8 +64,23 @@ qrk::Position<long> Run_driver::position() const
 {
     // !!!
 
-    Position<long> dummy;
-    return dummy;
+    if (run_driver_is_open(&pimpl->run_) != 0) {
+        // !!! エラー状態を更新する
+        Position<long> dummy;
+        return dummy;
+    }
+
+    long x_mm;
+    long y_mm;
+    unsigned short direction;
+    int ret = run_position(&pimpl->run_, &x_mm, &y_mm, &direction);
+    if (ret != 0) {
+        Position<long> dummy;
+        return dummy;
+    }
+
+    Position<long> position(x_mm, y_mm, rad(2.0 * M_PI * direction / 0xffff));
+    return position;
 }
 
 
@@ -120,6 +136,6 @@ bool Run_driver::set_wheel_velocity(int wheel_id, short mm_per_sec)
         return false;
     }
 
-    int ret = run_driver_set_wheel_velocity(&pimpl->run_, wheel_id, mm_per_sec);
+    int ret = run_set_wheel_velocity(&pimpl->run_, wheel_id, mm_per_sec);
     return (ret == 0) ? true : false;
 }

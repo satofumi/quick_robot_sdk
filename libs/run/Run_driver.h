@@ -61,7 +61,7 @@ namespace qrk
 
 
         //! 推定位置の取得
-        qrk::Position<long> position() const;
+        qrk::Position<long> position(void) const;
 
 
         // position() で返される推定位置をずらす
