@@ -15,13 +15,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if !defined FALSE
+#define FALSE 0
+#endif
+
+#if !defined TRUE
+#define TRUE 1
+#endif
+
 
 enum {
     BAUDRATE = 38400,
     DEFAULT_TIMEOUT = 1000,
-
-    FALSE = 0,
-    TRUE = 1,
 };
 
 
