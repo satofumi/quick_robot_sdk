@@ -10,4 +10,4 @@ sensor_parameter_SOURCES = sensor_parameter.cpp Connection_information.cpp Conne
 sync_time_stamp_SOURCES = sync_time_stamp.cpp Connection_information.cpp Connection_information.h
 
 INCLUDES = -I$(top_srcdir)/src
-LDADD = -L$(top_srcdir)/src $(INSTALL_LIBS)
+LDADD = -L$(top_srcdir)/src

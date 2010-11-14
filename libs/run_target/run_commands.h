@@ -17,6 +17,10 @@
 extern void handle_OP_command(const run_t *run);
 
 
+//! Set Parameter
+extern void handle_SP_command(run_t *run, const char *line_buffer);
+
+
 //! Wheel Velocity
 extern void handle_WV_command(run_t *run, const char *line_buffer);
 

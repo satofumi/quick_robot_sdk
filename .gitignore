@@ -19,6 +19,7 @@ config.log
 config.status
 packages/urg_cpp_library/src/Makefile
 packages/urg_cpp_library/sample/Makefile
+autoscan.log
 
 get_distance
 get_distance_intensity

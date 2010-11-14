@@ -38,7 +38,7 @@
 
   - 送信
   - "SP" (Set Parameter)
-    - id (1 [byte], hex)
+    - id (2 [byte], hex)
       - !!!
     - value (8 [byte], ascii hex)
       - !!!

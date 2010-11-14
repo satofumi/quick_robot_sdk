@@ -2,6 +2,7 @@
 
 LIBS_DIR = ../../libs
 
+CC = g++
 CXXFLAGS = -g -O0 -Wall -Werror -W $(INCLUDES) `sdl-config --cflags` `urg_c-config --cflags`
 INCLUDES = -I$(LIBS_DIR)/controller -I$(LIBS_DIR)/run -I$(LIBS_DIR)/geometry
 LDFLAGS =
@@ -24,6 +25,9 @@ REQUIRE_LIBS = $(LIBS_DIR)/run/librun.a $(LIBS_DIR)/controller/libcontroller.a $
 $(REQUIRE_LIBS) :
 	cd $(@D)/ && $(MAKE) $(@F)
 
-run_wired_controller  : $(REQUIRE_LIBS)
+run_wired_controller : run_joystick_control.o $(REQUIRE_LIBS)
 
 # DO NOT DELETE
+
+run_joystick_control.o: run_joystick_control.h
+run_wired_controller.o: run_joystick_control.h

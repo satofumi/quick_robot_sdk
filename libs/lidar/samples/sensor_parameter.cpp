@@ -29,16 +29,20 @@ int main(int argc, char *argv[])
     }
 
     // パラメータ情報の表示
-    printf("Sensor product type: %s\n", urg.product_type());
-    printf("Sensor firmware version: %s\n", urg.firmware_version());
-    printf("Sensor serial ID: %s\n", urg.serial_id());
-    printf("Sensor status: %s\n", urg.status());
+    cout << "Sensor product type: " << urg.product_type() << endl;
+    cout << "Sensor firmware version: " << urg.firmware_version() << endl;
+    cout << "Sensor serial ID: " << urg.serial_id() << endl;
+    cout << "Sensor status: " << urg.status() << endl;
 
-    printf("step: [%d, %d]\n", urg.min_step(), urg.max_step());
-    printf("distance: [%ld, %ld)\n", urg.min_distance(), urg.max_distance());
+    cout << "step: ["
+         << urg.min_step() << ", "
+         << urg.max_step() << "]" << endl;
+    cout << "distance: ["
+         << urg.min_distance()
+         << ", " << urg.max_distance() << endl;
 
-    printf("scan interval: %ld [usec]\n", urg.scan_usec());
-    printf("sensor data size: %d\n", urg.max_data_size());
+    cout << "scan interval: " << urg.scan_usec() << " [usec]" << endl;
+    cout << "sensor data size: " << urg.max_data_size() << endl;
 
     urg.close();
 

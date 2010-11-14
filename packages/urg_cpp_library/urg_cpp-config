@@ -19,7 +19,7 @@ while test $# -gt 0; do
       echo -I${prefix}/include/urg_cpp `urg_c-config --cflags`
       ;;
     --libs)
-      echo  -lurg_cpp -lurg_c -lrt `urg_c-config --libs`
+      echo  -lurg_cpp -lurg_c -lrt
       ;;
     *)
       echo "${usage}" 1>&2

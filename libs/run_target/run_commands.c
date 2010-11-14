@@ -12,6 +12,7 @@
 #include "itoh.h"
 #include "wheel_velocity.h"
 #include "connection.h"
+#include "update_parameter_id.h"
 
 
 void handle_OP_command(const run_t *run)
@@ -35,6 +36,20 @@ void handle_OP_command(const run_t *run)
     itoh(p, run->odometry.direction, 2);
 
     connection_write(response, 25);
+}
+
+
+void handle_SP_command(run_t *run, const char *line_buffer)
+{
+    (void)run;
+    (void)line_buffer;
+    // !!!
+
+    // ID の読み出し
+    // !!!
+
+    // 設定の更新
+    // !!!
 }
 
 

@@ -35,7 +35,7 @@ LIBS="$LIBS -lurg_cpp"
 # !!! todo added urg_c-config check
 CXXFLAGS="$CXXFLAGS `urg_c-config --cflags`"
 CFLAGS="$CFLAGS `urg_c-config --cflags`"
-LIBS="$LIBS `urg_c-config --libs` -lrt"
+LIBS="$LIBS `urg_c-config --libs`"
 
 INSTALL_LIBS="$LIBS"
 AC_SUBST(INSTALL_LIBS)

@@ -2,10 +2,10 @@
 
 LIBS_DIR = ../../libs
 
-CXXFLAGS = -g -O0 -Wall -Werror -W $(INCLUDES) `urg_c-config --cflags`
+CXXFLAGS = -g -O0 -Wall -Werror -W $(INCLUDES) `urg_cpp-config --cflags`
 INCLUDES =
 LDFLAGS =
-LDLIBS = `urg_c-config --libs`
+LDLIBS = `urg_cpp-config --libs`
 
 TARGET = urg_auto_recorder
 
@@ -24,5 +24,10 @@ REQUIRE_LIBS =
 $(REQUIRE_LIBS) :
 	cd $(@D)/ && $(MAKE) $(@F)
 
-urg_auto_recorder  : $(REQUIRE_LIBS)
+urg_auto_recorder : record_utilities.o urg_record_utilities.o $(REQUIRE_LIBS)
+
 # DO NOT DELETE
+
+record_utilities.o: record_utilities.h
+urg_auto_recorder.o: record_utilities.h urg_record_utilities.h
+urg_record_utilities.o: urg_record_utilities.h
