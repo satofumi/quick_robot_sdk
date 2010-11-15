@@ -20,6 +20,7 @@ config.status
 packages/urg_cpp_library/src/Makefile
 packages/urg_cpp_library/sample/Makefile
 autoscan.log
+Makefile.in
 
 get_distance
 get_distance_intensity
@@ -32,6 +33,7 @@ evaluate_timestamp
 libs/lidar/samples/find_port
 libs/controller/samples/usb_joystick_view
 programs/run_wired_controller/run_wired_controller
+programs/run_urg_wired_recorder/run_urg_wired_recorder
 */urg_auto_recorder/urg_auto_recorder
 all_test
 libs/run_target/test/wheel_velocity_test
