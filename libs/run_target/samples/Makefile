@@ -28,6 +28,7 @@ TARGET = \
 	motor_table_record.mot motor_table_record.rom \
 	circle_output.mot \
 	odometry_print.mot \
+	motor_control_graph.mot \
 
 all : $(TARGET)
 
@@ -59,6 +60,7 @@ sci_interrupt_echoback.mot sci_interrupt_echoback.rom : sci_interrupt_echoback.o
 motor_table_record.mot motor_table_record.rom : motor_table_record.o $(BASE_OBJ) $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/ring_buffer.o $(SOURCE_DIR)/sci_utilities.o $(SOURCE_DIR)/motor_pwm.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/mtu2_initialize.o
 circle_output.mot : circle_output.o $(BASE_OBJ) $(SOURCE_DIR)/isin_icos.o $(SOURCE_DIR)/sci_read_write.o $(SOURCE_DIR)/sci_utilities.o
 odometry_print.mot : odometry_print.o $(BASE_OBJ) $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/timer_control.o $(SOURCE_DIR)/ring_buffer.o $(SOURCE_DIR)/isin_icos.o $(SOURCE_DIR)/sci_utilities.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/mtu2_initialize.o $(SOURCE_DIR)/odometry_calculate.o
+motor_control_graph.mot : motor_control_graph.o $(BASE_OBJ) $(SOURCE_DIR)/timer_control.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/motor_table_pwm.o $(SOURCE_DIR)/motor_pwm.o $(SOURCE_DIR)/motor_velocity.o $(SOURCE_DIR)/mtu2_initialize.o $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/ring_buffer.o $(SOURCE_DIR)/sci_utilities.o
 
 # DO NOT DELETE
 

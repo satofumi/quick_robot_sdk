@@ -13,9 +13,8 @@
 #include "encoder_reader.h"
 
 enum {
-    DEFAULT_GAIN_P = 48,        /* 1/1 の重さ */
-    DEFAULT_GAIN_I = 32,        /* 1/256 の重さ */
-    I_REDUCE_VALUE = 16,
+    DEFAULT_GAIN_P = 64,        /* 1/1 の重さ */
+    DEFAULT_GAIN_I = 128,       /* 1/256 の重さ */
     GAIN_I_SHIFT = 8,
 };
 

@@ -18,7 +18,7 @@ enum {
 
 
 #define ENCODER_RESOLUTION 400  //!< エンコーダ分解能 [1]
-#define WHEEL_RADIUS_MM 28      //!< 車輪の半径 [mm]
+#define WHEEL_RADIUS_MM 27.04   //!< 車輪の半径 [mm]
 #define GEAR_RATIO 1.0          //!< ギヤ比 (モータ軸/車輪軸) [1]
 
 // !!!

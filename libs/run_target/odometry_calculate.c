@@ -36,7 +36,8 @@ void odometry_update(odometry_t *odometry,
 {
     enum {
         MM_SHIFT_WIDTH = 10,
-        MM_PER_COUNT = (int)(2 * M_PI * (WHEEL_RADIUS_MM << MM_SHIFT_WIDTH)
+        MM_PER_COUNT = (int)(2 * M_PI * (WHEEL_RADIUS_MM *
+                                         (1 << MM_SHIFT_WIDTH))
                              / ENCODER_RESOLUTION),
         M_PER_COUNT = (int)(2 * M_PI * (WHEEL_RADIUS_MM * 1000.0)
                             / ENCODER_RESOLUTION),
@@ -61,21 +62,22 @@ void odometry_update(odometry_t *odometry,
     } else if (direction_count > DIRECTION_COUNT_MAX) {
         direction_count -= DIRECTION_COUNT_MAX;
     }
-    odometry->direction_count = direction_count;
-    odometry->direction =
+    direction =
         (direction_count << (ODOMETFY_DIRECTION_BIT_WIDTH - MM_SHIFT_WIDTH))
         / (DIRECTION_COUNT_MAX >> MM_SHIFT_WIDTH);
-    direction = odometry->direction;
+    odometry->direction_count = direction_count;
+    odometry->direction = direction;
 
     // 並進速度
     straight_velocity = (wheel_mm[RIGHT_WHEEL] + wheel_mm[LEFT_WHEEL]);
     odometry->straight_velocity = straight_velocity;
 
     // 位置の更新
+    // 並進速度の計算で 2 で割らなかったぶんを、ここで割る
     odometry->xy_count[X_AXIS] +=
-        (straight_velocity * icos(direction)) >> MM_SHIFT_WIDTH;
+        (straight_velocity * icos(direction)) >> (MM_SHIFT_WIDTH + 1);
     odometry->xy_count[Y_AXIS] +=
-        (straight_velocity * isin(direction)) >> MM_SHIFT_WIDTH;
+        (straight_velocity * isin(direction)) >> (MM_SHIFT_WIDTH + 1);
 
     const long compare_value = (M_PER_COUNT * 2) << ISINCOS_SHIFT_WIDTH;
     for (i = 0; i < NUMBER_OF_AXIS; ++i) {
@@ -88,7 +90,7 @@ void odometry_update(odometry_t *odometry,
             count += compare_value;
             --odometry->m[i];
         }
-        odometry->mm[i] = (count * 1000) / compare_value;
+        odometry->mm[i] = count * 1000 / compare_value;
 
         if (odometry->m[i] >= 1000) {
             odometry->m[i] -= 1000;
@@ -100,6 +102,4 @@ void odometry_update(odometry_t *odometry,
         }
         odometry->xy_count[i] = count;
     }
-    // !!! debug
-    //odometry->xy_count[Y_AXIS] = compare_value;
 }

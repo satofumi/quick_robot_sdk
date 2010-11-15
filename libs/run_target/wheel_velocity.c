@@ -51,9 +51,9 @@ static int count2mm_velocity(int count)
 {
     int mm_per_sec =
         count * (int)(2 * M_PI *
-                      (WHEEL_RADIUS_MM <<
-                       (POINT_SHIFT_WIDTH - CONTROL_CYCLE_MSEC_SHIFT)))
-        / ENCODER_RESOLUTION;
+                      (WHEEL_RADIUS_MM *
+                       (1 << (POINT_SHIFT_WIDTH - CONTROL_CYCLE_MSEC_SHIFT)))
+                      / ENCODER_RESOLUTION);
 
     return mm_per_sec;
 }

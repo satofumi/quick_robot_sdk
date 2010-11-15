@@ -15484,7 +15484,7 @@ fi
 
 
 # Checks for libraries.
-LIBS="$LIBS -lurg_cpp"
+#LIBS="$LIBS -lurg_cpp"
 #AC_CHECK_LIB(rt, clock_gettime, [LIBS="$LIBS -lrt"], AC_MSG_NOTICE([*** rt library not found! ***]))
 #AC_CHECK_LIB(urg_c, urg_open, [HAVE_LIBURG_C="yes"], AC_MSG_ERROR([*** urg_c not found! ***]))
 # !!! todo added urg_c-config check

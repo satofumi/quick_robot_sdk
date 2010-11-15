@@ -50,7 +50,7 @@ static void output(void)
 int main(void)
 {
     enum {
-        DUTY = 0,
+        DUTY = 40,
     };
 
     imask_initialize();
