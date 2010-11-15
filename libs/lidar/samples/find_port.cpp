@@ -19,7 +19,7 @@ int main(void)
 
     size_t n = found_ports.size();
     if (n == 0) {
-        printf("could not found ports.\n");
+        cout << "could not found ports." << endl;
         return 1;
     }
 

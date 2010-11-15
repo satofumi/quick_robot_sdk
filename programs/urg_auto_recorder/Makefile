@@ -2,6 +2,7 @@
 
 LIBS_DIR = ../../libs
 
+CC = g++
 CXXFLAGS = -g -O0 -Wall -Werror -W $(INCLUDES) `urg_cpp-config --cflags`
 INCLUDES =
 LDFLAGS =
