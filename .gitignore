@@ -20,7 +20,7 @@ config.status
 packages/urg_cpp_library/src/Makefile
 packages/urg_cpp_library/sample/Makefile
 autoscan.log
-*/Makefile.in
+Makefile.in
 config.h
 configu.h.in
 configure
