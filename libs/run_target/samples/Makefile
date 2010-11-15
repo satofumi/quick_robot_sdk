@@ -41,6 +41,11 @@ depend :
 ######################################################################
 BASE_OBJ = $(SOURCE_DIR)/clock_initialize.o $(SOURCE_DIR)/imask.o
 
+$(SOURCE_DIR)/isin_icos.c $(SOURCE_DIR)/isin_icos.h :
+	cd ../ && $(MAKE) isin_icos.h isin_icos.c
+
+$(SOURCE_DIR)/isin_icos.o : $(SOURCE_DIR)/isin_icos.c $(SOURCE_DIR)/isin_icos.h
+
 sci_write.mot sci_write.rom : sci_write.o $(BASE_OBJ) $(SOURCE_DIR)/sci_utilities.o $(SOURCE_DIR)/sci_read_write.o
 sci_echoback.mot : sci_echoback.o $(BASE_OBJ) $(SOURCE_DIR)/sci_read_write.o
 timer_1sec.mot timer_1sec.dis : timer_1sec.o $(BASE_OBJ) $(SOURCE_DIR)/timer_control.o itoa.o $(SOURCE_DIR)/std_string.o $(SOURCE_DIR)/sci_read_write.o
@@ -75,7 +80,7 @@ motor_velocity_run.o: ../encoder_t.h ../robot_parameter.h
 odometry_print.o: ../interrupt_priority.h ../sci_read_write.h
 odometry_print.o: ../sci_utilities.h ../imask.h ../clock_initialize.h
 odometry_print.o: ../timer_control.h ../odometry_calculate.h ../odometry_t.h
-odometry_print.o: ../encoder_reader.h ../encoder_t.h
+odometry_print.o: ../encoder_reader.h ../encoder_t.h ../controller_config.h
 sci_echoback.o: ../clock_initialize.h ../imask.h ../sci_read_write.h
 sci_echoback.o: ../interrupt_priority.h
 sci_interrupt_echoback.o: ../clock_initialize.h ../imask.h

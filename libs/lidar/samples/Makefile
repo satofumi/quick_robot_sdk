@@ -38,6 +38,7 @@ $(TARGET) : Connection_information.o $(REQUIRE_LIBS)
 
 Connection_information.o: Connection_information.h
 calculate_xy.o: Connection_information.h
+evaluate_timestamp.o: Connection_information.h
 get_distance.o: Connection_information.h
 get_distance_intensity.o: Connection_information.h
 get_multiecho.o: Connection_information.h

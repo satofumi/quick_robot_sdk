@@ -26,3 +26,4 @@ $(REQUIRE_LIBS) :
 	cd $(@D)/ && $(MAKE) $(@F)
 
 run_urg_wired_recorder : ../run_wired_controller/run_joystick_control.o ../urg_auto_recorder/record_utilities.o ../urg_auto_recorder/urg_record_utilities.o $(REQUIRE_LIBS)
+# DO NOT DELETE

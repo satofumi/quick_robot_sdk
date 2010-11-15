@@ -90,6 +90,7 @@ htoi.o: htoi.h
 iatan2.o: iatan2.h
 imask.o: imask.h
 isin_icos.o: isin_icos.h
+itoh.o: itoh.h
 motor_pwm.o: motor_pwm.h mtu2_initialize.h
 motor_table_pwm.o: motor_table_pwm.h motor_pwm.h
 motor_velocity.o: motor_velocity.h motor_t.h robot_parameter.h
@@ -109,7 +110,7 @@ protocol_handler.o: run_commands.h std_string.h
 ring_buffer.o: ring_buffer.h
 run_commands.o: run_commands.h run_t.h controller_config.h run_system_t.h
 run_commands.o: odometry_t.h path_t.h wheel_t.h encoder_t.h motor_t.h htoi.h
-run_commands.o: wheel_velocity.h connection.h
+run_commands.o: itoh.h wheel_velocity.h connection.h update_parameter_id.h
 run_drive.o: setup_state.h run_t.h controller_config.h run_system_t.h
 run_drive.o: odometry_t.h path_t.h wheel_t.h encoder_t.h motor_t.h
 run_drive.o: control_state.h
