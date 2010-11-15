@@ -57,7 +57,7 @@ int main(void)
     }
 
     // ジョイスティックによる操作
-    while (control_by_joystick(robot_moving, joystick)) {
+    while (!control_by_joystick(robot_moving, joystick)) {
         // 現在位置を出力
         print_robot_position(robot_moving);
 
