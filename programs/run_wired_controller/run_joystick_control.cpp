@@ -76,13 +76,14 @@ namespace
 
 bool control_by_joystick(Run_driver& robot_moving, Usb_joystick& joystick)
 {
-    bool quit = false;
+    bool is_normal = true;
 
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         joystick.set_event(&event);
         if (event.type == SDL_QUIT) {
-            return false;
+            is_normal = false;
+            break;
         }
     }
 
@@ -95,7 +96,7 @@ bool control_by_joystick(Run_driver& robot_moving, Usb_joystick& joystick)
 
     if (is_R1_pressed && is_R2_pressed) {
         // 走行終了。戻る
-        quit = true;
+        is_normal = false;
     }
 
     // 並進速度、回転速度の計算
@@ -107,5 +108,5 @@ bool control_by_joystick(Run_driver& robot_moving, Usb_joystick& joystick)
     set_robot_velocity(robot_moving,
                        straight_velocity, rotate_velocity);
 
-    return quit;
+    return is_normal;
 }

@@ -13,21 +13,53 @@
 
 void path_follow_initialize(path_t *path)
 {
-    (void)path;
+    path->is_controlling = 0;
+    path->mode = PATH_UNKNOWN;
+    path->target_translational_velocity = 0;
+    path->target_rotational_velocity = 0;
     // !!!
 }
 
 
-void path_follow_update(path_t *path)
+void path_follow_update(long *translational_velocity,
+                        long *rotational_velocity, path_t *path)
 {
-    (void)path;
-    // !!!
+    // 指定がない場合は、左右輪の速度がゼロになるように制御する
+    *translational_velocity = 0;
+    *rotational_velocity = 0;
 
-    // 並進速度の制御
-    // !!!
+    if (!path->is_controlling) {
+        // 左右輪の速度がゼロになるように制御する
+        // 速度がゼロのままこのモジュールを抜ける
 
-    // 回転速度の制御
-    // !!!
+    } else {
+        switch (path->mode) {
 
-    // !!!
+        case PATH_FOLLOW_LINE:
+            // 並進速度の制御
+            // !!! 停止するあたりは、いずれ実装する
+            *translational_velocity = path->target_translational_velocity;
+            // !!!
+            *rotational_velocity = -1;
+            break;
+
+        case PATH_FOLLOW_CIRCLE:
+            // 回転速度の制御
+            // !!! 停止するあたりは、いずれ実装する
+            *translational_velocity = path->target_translational_velocity;
+
+            // !!!
+            *rotational_velocity = -1;
+            break;
+
+        case PATH_TURN_TO_DIRECTION:
+            // 指定した方向を向く
+            // !!!
+            *rotational_velocity = -1;
+            break;
+
+        case PATH_UNKNOWN:
+            break;
+        }
+    }
 }

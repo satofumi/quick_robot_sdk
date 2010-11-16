@@ -14,6 +14,6 @@
 
 
 extern void run_system_initialize(run_system_t *run_system);
-// !!!
+extern void run_system_increment_timestamp(run_system_t *run_system);
 
 #endif /* !QRK_RUN_SYSTEM_H */

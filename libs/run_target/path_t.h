@@ -13,15 +13,22 @@
 
 //! 経路モード
 typedef enum {
+    PATH_UNKNOWN,
     PATH_FOLLOW_LINE,           //!< 直線追従
     PATH_FOLLOW_CIRCLE,         //!< 円弧追従
+    PATH_TURN_TO_DIRECTION,     //!< 指定した方向を向く
 } path_mode_t;
 
 
 //! 経路の管理
 typedef struct
 {
-    path_mode_t path_mode;
+    unsigned char is_controlling; //!< 制御中かどうか
+
+    long target_translational_velocity; //!< 並進の目標速度
+    long target_rotational_velocity;    //!< 回転の目標速度
+
+    path_mode_t mode;
 } path_t;
 
 #endif /* !QRK_PATH_T_H */

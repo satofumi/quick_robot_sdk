@@ -20,7 +20,7 @@ static motor_t motor_[2];
 
 
 enum {
-    TARGET_COUNT = 1,
+    TARGET_COUNT = 2,
 };
 
 
@@ -40,8 +40,8 @@ static void timer_handler(void)
         encoder_update(&encoder_[i]);
         current_count[i] = encoder_difference(&encoder_[i]);
     }
-    motor_velocity_control(&motor_[0], +TARGET_COUNT, current_count[0]);
-    motor_velocity_control(&motor_[1], -TARGET_COUNT, current_count[1]);
+    motor_velocity_control(&motor_[0], +TARGET_COUNT, -current_count[0]);
+    motor_velocity_control(&motor_[1], -TARGET_COUNT, -current_count[1]);
 }
 
 

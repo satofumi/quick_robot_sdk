@@ -15,6 +15,7 @@
 #include "odometry_calculate.h"
 #include "encoder_reader.h"
 #include "controller_config.h"
+#include "motor_pwm.h"
 
 
 static odometry_t odometry_;
@@ -48,7 +49,7 @@ static void timer_handler(void)
     }
     right_encoder_count = encoder_difference(&encoder_[RIGHT_WHEEL]);
     left_encoder_count = encoder_difference(&encoder_[LEFT_WHEEL]);
-    odometry_update(&odometry_, -right_encoder_count, +left_encoder_count);
+    odometry_update(&odometry_, right_encoder_count, -left_encoder_count);
 
     if (msec_counter >= 1000) {
         msec_counter = 0;
@@ -57,12 +58,6 @@ static void timer_handler(void)
         sci_putint(right_encoder_count);
         sci_puts(" ");
         sci_putint(left_encoder_count);
-#endif
-#if 0
-        //sci_putint(odometry_.direction_count);
-        //sci_puts(" ");
-        sci_putint(odometry_.direction);
-        sci_puts(",");
 #endif
 #if 1
         sci_puts("(");
@@ -78,6 +73,12 @@ static void timer_handler(void)
         sci_puts(" ");
         sci_putint(odometry_.mm[Y_AXIS]);
         sci_puts("),");
+#endif
+#if 1
+        //sci_putint(odometry_.direction_count);
+        //sci_puts(" ");
+        sci_putint(odometry_.direction);
+        sci_puts(",");
 #endif
 #if 0
         sci_putint(odometry_.xy_count[X_AXIS]);
@@ -99,6 +100,7 @@ int main(void)
     sci_initialize(INTERRUPT_PRIORITY_COMMUNICATION, 38400);
     timer_initialize(INTERRUPT_PRIORITY_TIMER);
     for (i = 0; i < 2; ++i) {
+        motor_pwm_initialize(i);
         encoder_initialize(&encoder_[i], i);
     }
     odometry_initialize(&odometry_);
@@ -106,6 +108,9 @@ int main(void)
 
     timer_set_interval_function(timer_handler);
     timer_start();
+
+    //motor_pwm_set_duty(0, MOTOR_PWM_CCW, 50);
+    //motor_pwm_set_duty(1, MOTOR_PWM_CW, 50);
 
     while (1) {
         ;

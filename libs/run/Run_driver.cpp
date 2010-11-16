@@ -75,6 +75,7 @@ qrk::Position<long> Run_driver::position() const
     unsigned short direction;
     int ret = run_position(&pimpl->run_, &x_mm, &y_mm, &direction);
     if (ret != 0) {
+        // !!!
         Position<long> dummy;
         return dummy;
     }
@@ -85,23 +86,30 @@ qrk::Position<long> Run_driver::position() const
 
 
 bool Run_driver::set_path_line(const qrk::Position<long>& position,
-                                   long stop_length)
+                               long stop_length)
 {
-    (void)position;
-    (void)stop_length;
-    // !!!
-    return false;
+    unsigned short direction = 0xffff * position.angle.to_deg() / 360.0;
+    int ret = run_set_path_line(position.x, position.y, direction,
+                                 stop_length);
+    if (ret != 0) {
+        // !!!
+        return false;
+    }
+
+    return true;
 }
 
 
 bool Run_driver::set_path_circle(const qrk::Point<long>& center,
-                                     long radius,
-                                     Circle_rotation_direction direction,
-                                     const Angle& stop_angle)
+                                 long radius,
+                                 Circle_rotation_direction direction,
+                                 const Angle& start_angle,
+                                 const Angle& stop_angle)
 {
     (void)center;
     (void)radius;
     (void)direction;
+    (void)start_angle;
     (void)stop_angle;
     // !!!
     return false;
@@ -112,6 +120,19 @@ long Run_driver::path_length_to_target(void) const
 {
     // !!!
     return -1;
+}
+
+
+bool Run_driver::start(void)
+{
+    // !!!
+    return false;
+}
+
+
+void Run_driver::stop(void)
+{
+    // !!!
 }
 
 

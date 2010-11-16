@@ -34,7 +34,7 @@ depend :
 
 .PHONY : all clean html upload
 ######################################################################
-run_drive.mot run_drive.rom run_drive.dis : run_drive.o setup_state.o control_state.o pause_state.o clock_initialize.o imask.o run_system.o connection.o connection_utilities.o protocol_handler.o sci_interrupt_read_write.o emergency_io_control.o timer_control.o path_follow.o position_handler.o velocity_handler.o body_handler.o wheel_velocity.o motor_velocity.o motor_table_pwm.o motor_pwm.o encoder_reader.o odometry_calculate.o mtu2_initialize.o ring_buffer.o run_commands.o htoi.o itoh.o isin_icos.o #iatan2.o
+run_drive.mot run_drive.rom run_drive.dis : run_drive.o setup_state.o control_state.o pause_state.o clock_initialize.o imask.o run_system.o connection.o connection_utilities.o protocol_handler.o sci_interrupt_read_write.o emergency_io_control.o timer_control.o path_follow.o position_handler.o velocity_handler.o body_control.o wheel_velocity.o motor_velocity.o motor_table_pwm.o motor_pwm.o encoder_reader.o odometry_calculate.o mtu2_initialize.o ring_buffer.o run_commands.o htoi.o itoh.o isin_icos.o #iatan2.o
 
 isin_icos.c : create_isin_icos.rb
 	$(RUBY) $< > $@ || $(RM) $@
@@ -52,7 +52,7 @@ iatan2.o : iatan2.h
 
 # DO NOT DELETE
 
-body_handler.o: wheel_t.h encoder_t.h motor_t.h
+body_control.o: wheel_t.h encoder_t.h motor_t.h
 control_state.o: run_t.h controller_config.h run_system_t.h odometry_t.h
 control_state.o: path_t.h wheel_t.h encoder_t.h motor_t.h
 encoder_reader.o: encoder_t.h
@@ -73,8 +73,8 @@ setup_state.o: run_t.h controller_config.h run_system_t.h odometry_t.h
 setup_state.o: path_t.h wheel_t.h encoder_t.h motor_t.h
 wheel_t.o: encoder_t.h motor_t.h
 wheel_velocity.o: wheel_t.h encoder_t.h motor_t.h
-body_handler.o: body_handler.h wheel_t.h encoder_t.h motor_t.h
-body_handler.o: wheel_velocity.h controller_config.h robot_parameter.h
+body_control.o: body_control.h wheel_t.h encoder_t.h motor_t.h
+body_control.o: wheel_velocity.h controller_config.h robot_parameter.h
 clock_initialize.o: clock_initialize.h
 connection.o: connection.h sci_read_write.h interrupt_priority.h
 connection_utilities.o: connection_utilities.h connection.h std_string.h

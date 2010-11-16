@@ -59,7 +59,7 @@ sci_interrupt_write.mot sci_interrupt_write.rom : sci_interrupt_write.o $(BASE_O
 sci_interrupt_echoback.mot sci_interrupt_echoback.rom : sci_interrupt_echoback.o $(BASE_OBJ) $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/ring_buffer.o
 motor_table_record.mot motor_table_record.rom : motor_table_record.o $(BASE_OBJ) $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/ring_buffer.o $(SOURCE_DIR)/sci_utilities.o $(SOURCE_DIR)/motor_pwm.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/mtu2_initialize.o
 circle_output.mot : circle_output.o $(BASE_OBJ) $(SOURCE_DIR)/isin_icos.o $(SOURCE_DIR)/sci_read_write.o $(SOURCE_DIR)/sci_utilities.o
-odometry_print.mot : odometry_print.o $(BASE_OBJ) $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/timer_control.o $(SOURCE_DIR)/ring_buffer.o $(SOURCE_DIR)/isin_icos.o $(SOURCE_DIR)/sci_utilities.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/mtu2_initialize.o $(SOURCE_DIR)/odometry_calculate.o
+odometry_print.mot : odometry_print.o $(BASE_OBJ) $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/timer_control.o $(SOURCE_DIR)/ring_buffer.o $(SOURCE_DIR)/isin_icos.o $(SOURCE_DIR)/sci_utilities.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/mtu2_initialize.o $(SOURCE_DIR)/odometry_calculate.o $(SOURCE_DIR)/motor_pwm.o
 motor_control_graph.mot : motor_control_graph.o $(BASE_OBJ) $(SOURCE_DIR)/timer_control.o $(SOURCE_DIR)/encoder_reader.o $(SOURCE_DIR)/motor_table_pwm.o $(SOURCE_DIR)/motor_pwm.o $(SOURCE_DIR)/motor_velocity.o $(SOURCE_DIR)/mtu2_initialize.o $(SOURCE_DIR)/sci_interrupt_read_write.o $(SOURCE_DIR)/ring_buffer.o $(SOURCE_DIR)/sci_utilities.o
 
 # DO NOT DELETE
@@ -70,6 +70,11 @@ encoder_print.o: ../imask.h ../clock_initialize.h ../interrupt_priority.h
 encoder_print.o: ../encoder_reader.h ../encoder_t.h ../sci_read_write.h
 encoder_print.o: ../sci_utilities.h ../motor_pwm.h
 itoa.o: itoa.h
+motor_control_graph.o: ../clock_initialize.h ../imask.h
+motor_control_graph.o: ../interrupt_priority.h ../motor_velocity.h
+motor_control_graph.o: ../motor_t.h ../timer_control.h ../encoder_reader.h
+motor_control_graph.o: ../encoder_t.h ../robot_parameter.h
+motor_control_graph.o: ../sci_read_write.h ../sci_utilities.h
 motor_pwm_out.o: ../clock_initialize.h ../motor_pwm.h
 motor_table_record.o: ../imask.h ../clock_initialize.h
 motor_table_record.o: ../interrupt_priority.h ../sci_read_write.h
@@ -83,6 +88,7 @@ odometry_print.o: ../interrupt_priority.h ../sci_read_write.h
 odometry_print.o: ../sci_utilities.h ../imask.h ../clock_initialize.h
 odometry_print.o: ../timer_control.h ../odometry_calculate.h ../odometry_t.h
 odometry_print.o: ../encoder_reader.h ../encoder_t.h ../controller_config.h
+odometry_print.o: ../motor_pwm.h
 sci_echoback.o: ../clock_initialize.h ../imask.h ../sci_read_write.h
 sci_echoback.o: ../interrupt_priority.h
 sci_interrupt_echoback.o: ../clock_initialize.h ../imask.h

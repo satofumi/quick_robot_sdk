@@ -1,5 +1,5 @@
-#ifndef QRK_BODY_HANDLER_H
-#define QRK_BODY_HANDLER_H
+#ifndef QRK_BODY_CONTROL_H
+#define QRK_BODY_CONTROL_H
 
 /*!
   \file
@@ -7,7 +7,7 @@
 
   \author Satofumi KAMIMURA
 
-  $Id: body_handler.h 1927 2010-09-26 23:09:26Z satofumi $
+  $Id: body_control.h 1927 2010-09-26 23:09:26Z satofumi $
 */
 
 #include "wheel_t.h"
@@ -17,11 +17,11 @@ extern void body_set_velocity(wheel_t* wheels,
                               int translational_velocity,
                               int rotational_velocity);
 
-#endif /* !QRK_BODY_HANDLER_H */
+#endif /* !QRK_BODY_CONTROL_H */
 
 
 /*!
-  \page body_handler_h_page 並進速・回転速の制御 (記述中)
+  \page body_control_h_page 並進速・回転速の制御
 
   \todo テストで正当性を保証すること
 

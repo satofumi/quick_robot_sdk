@@ -22,7 +22,7 @@ static motor_t motor_;
 
 
 enum {
-    TARGET_COUNT = 3,
+    TARGET_COUNT = 8,
 };
 
 
@@ -40,7 +40,7 @@ static void timer_handler(void)
     encoder_update(&encoder_);
     current_count = encoder_difference(&encoder_);
 
-    motor_velocity_control(&motor_, +TARGET_COUNT, current_count);
+    motor_velocity_control(&motor_, +TARGET_COUNT, -current_count);
 
     // エンコーダ値の出力
     sci_putint(current_count);

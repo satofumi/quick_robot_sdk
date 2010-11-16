@@ -4,10 +4,10 @@
 
   \author Satofumi KAMIMURA
 
-  $Id: body_handler.c 1927 2010-09-26 23:09:26Z satofumi $
+  $Id: body_control.c 1927 2010-09-26 23:09:26Z satofumi $
 */
 
-#include "body_handler.h"
+#include "body_control.h"
 #include "wheel_velocity.h"
 #include "controller_config.h"
 #include "robot_parameter.h"

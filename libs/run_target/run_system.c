@@ -16,3 +16,13 @@ void run_system_initialize(run_system_t *run_system)
     run_system->sec = 0;
     run_system->mode = NORMAL_CONTROL;
 }
+
+
+void run_system_increment_timestamp(run_system_t *run_system)
+{
+    ++run_system->msec;
+    if (run_system->msec >= 1000) {
+        run_system->msec = 0;
+        ++run_system->sec;
+    }
+}

@@ -48,18 +48,18 @@ namespace
 
 int main(void)
 {
-    Run_driver robot_moving;
+    Run_driver robot;
     Usb_joystick joystick;
 
     // デバイスとの接続
-    if (!open_devices(robot_moving, joystick)) {
+    if (!open_devices(robot, joystick)) {
         return 1;
     }
 
     // ジョイスティックによる操作
-    while (!control_by_joystick(robot_moving, joystick)) {
+    while (control_by_joystick(robot, joystick)) {
         // 現在位置を出力
-        print_robot_position(robot_moving);
+        print_robot_position(robot);
 
         SDL_Delay(100);
     }

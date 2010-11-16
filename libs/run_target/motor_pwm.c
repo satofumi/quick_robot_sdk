@@ -166,7 +166,7 @@ void motor_pwm_initialize(int device_id)
         MTU2.TSTR.BYTE &= ~0x40;
 
         // 周期を TGRA に設定
-        MTU23.TCR.BYTE = 0x25;
+        MTU23.TCR.BYTE = 0x22;
         MTU23.TGRA = 0x00ff;
 
         // コンペアマッチ出力が TGRA と同じになるよう TGRC も設定する
@@ -197,7 +197,7 @@ void motor_pwm_initialize(int device_id)
         MTU2.TOER.BYTE |= 0x12;
 
         // 周期を TGRA に設定
-        MTU24.TCR.BYTE = 0x25;
+        MTU24.TCR.BYTE = 0x22;
         MTU24.TGRA = 0x00ff;
 
         // コンペアマッチ出力が TGRA と同じになるよう TGRC も設定する

@@ -17,9 +17,11 @@
 #include "emergency_io_control.h"
 #include "timer_control.h"
 #include "protocol_handler.h"
+#include "run_system.h"
 #include "encoder_reader.h"
 #include "odometry_calculate.h"
 #include "path_follow.h"
+#include "body_control.h"
 #include "wheel_velocity.h"
 #include <stddef.h>
 
@@ -33,7 +35,12 @@ static void control_task(void)
     int left_encoder_count;
     int right_encoder_count;
     int i;
+    long translational_velocity;
+    long rotational_velocity;
     unsigned char current_interrupt_priority = get_imask_exr();
+
+    // タイムスタンプの更新
+    run_system_increment_timestamp(&run_->run_system);
 
     // CONTROL_CYCLE_MSEC 毎に処理を行う
     if (++msec >= CONTROL_CYCLE_MSEC) {
@@ -41,11 +48,6 @@ static void control_task(void)
     } else {
         return;
     }
-
-    // タイムスタンプの更新
-    // !!!
-    // !!! 関数化する
-    //++run_->system.msec;
 
     // エンコーダ値の更新
     set_imask_exr(INTERRUPT_PRIORITY_ALL_MASK);
@@ -57,12 +59,15 @@ static void control_task(void)
     // 推定自己位置の更新
     left_encoder_count = encoder_difference(&run_->wheel[LEFT_WHEEL].encoder);
     right_encoder_count = encoder_difference(&run_->wheel[RIGHT_WHEEL].encoder);
-    odometry_update(&run_->odometry, -right_encoder_count, +left_encoder_count);
+    odometry_update(&run_->odometry, +right_encoder_count, -left_encoder_count);
 
     // 走行経路の指示
     switch (run_->run_system.mode) {
     case NORMAL_CONTROL:
-        path_follow_update(&run_->path);
+        path_follow_update(&translational_velocity,
+                           &rotational_velocity, &run_->path);
+        body_set_velocity(run_->wheel,
+                          translational_velocity, rotational_velocity);
         break;
 
     case DIRECT_WHEEL_CONTROL:

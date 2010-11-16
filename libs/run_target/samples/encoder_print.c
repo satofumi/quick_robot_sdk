@@ -33,6 +33,7 @@ static void wait(void)
 
 static void output(void)
 {
+    static int total_count_[2] = { 0, 0 };
     int i;
 
     for (i = 0; i < 2; ++i) {
@@ -40,8 +41,11 @@ static void output(void)
 
         encoder_update(&encoder_[i]);
         count = encoder_difference(&encoder_[i]);
+        total_count_[i] += count;
         sci_putint(count);
-        sci_puts(", ");
+        sci_puts("(");
+        sci_putint(total_count_[i]);
+        sci_puts("), ");
     }
     sci_puts("\r\n");
 }
@@ -50,7 +54,7 @@ static void output(void)
 int main(void)
 {
     enum {
-        DUTY = 40,
+        DUTY = 0,
     };
 
     imask_initialize();

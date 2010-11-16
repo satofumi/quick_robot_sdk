@@ -32,7 +32,7 @@ typedef struct
     long km[NUMBER_OF_AXIS];
 
     // 速度情報
-    long straight_velocity;
+    //long straight_velocity;
     // !!!
 
 } odometry_t;

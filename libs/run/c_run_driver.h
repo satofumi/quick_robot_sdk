@@ -21,8 +21,8 @@ extern const char *run_driver_what(const run_driver_t *run);
 extern int run_position(run_driver_t *run,
                         long *x_mm, long *y_mm, unsigned short *direction);
 
-//bool set_path_line(const qrk::Position<long>& position,
-//long stop_length);
+extern int run_set_path_line(long x_mm, long y_mm, unsigned short direction,
+                             long stop_length);
 
 //bool set_path_circle(const qrk::Point<long>& center, long radius,
 //Circle_rotation_direction direction,

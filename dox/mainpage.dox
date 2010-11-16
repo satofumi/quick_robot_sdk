@@ -55,15 +55,28 @@
       - 経路制御
         - \subpage protocol_handler_h_page
         - \subpage odometry_calculate_h_page
+        - \subpage path_follow_h_page
+          - 直線追従
+          - 円弧追従
+          - 指定した直線上で停止
+          - !!!
         - \subpage position_handler_h_page
+          - 並進速
+            - 指定位置だけ進んで停止
+          - 回転速
+            - 指定された方向を向いて停止
         - \subpage velocity_handler_h_page
-          - \subpage body_handler_h_page
-          - \subpage wheel_velocity_h_page
-            - \subpage motor_velocity_h_page
-            - \subpage motor_table_pwm_h_page
-            - \subpage motor_pwm_h_page
-              - \subpage motor_pwm_c_page
-            - \subpage encoder_control_h_page
+          - 並進速
+            - 等加速度から一定速度での走行
+          - 回転速
+            - 等加速度から一定速度での回転
+        - \subpage body_control_h_page
+        - \subpage wheel_velocity_h_page
+          - \subpage motor_velocity_h_page
+          - \subpage motor_table_pwm_h_page
+          - \subpage motor_pwm_h_page
+            - \subpage motor_pwm_c_page
+          - \subpage encoder_control_h_page
       - システム設定
         - \subpage clock_initialize_h_page
         - \subpage timer_control_h_page

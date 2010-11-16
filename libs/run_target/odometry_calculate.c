@@ -26,7 +26,7 @@ void odometry_initialize(odometry_t *odometry)
         odometry->mm[i] = 0;
         odometry->km[i] = 0;
     }
-    odometry->straight_velocity = 0;
+    //odometry->translational_velocity = 0;
 }
 
 
@@ -35,62 +35,48 @@ void odometry_update(odometry_t *odometry,
                      int left_encoder_difference)
 {
     enum {
-        MM_SHIFT_WIDTH = 10,
-        MM_PER_COUNT = (int)(2 * M_PI * (WHEEL_RADIUS_MM *
-                                         (1 << MM_SHIFT_WIDTH))
-                             / ENCODER_RESOLUTION),
-        M_PER_COUNT = (int)(2 * M_PI * (WHEEL_RADIUS_MM * 1000.0)
-                            / ENCODER_RESOLUTION),
-        DIRECTION_COUNT_MAX = (int)(2 * M_PI * TREAD * (1 << MM_SHIFT_WIDTH)),
+        COUNT_PER_M = (int)(1000.0 * ENCODER_RESOLUTION
+                            / (2.0 * M_PI * WHEEL_RADIUS_MM)),
+        DIRECTION_COUNT_MAX = (int)(1.0 * TREAD * ENCODER_RESOLUTION
+                                    / WHEEL_RADIUS_MM),
     };
 
-    long wheel_mm[NUMBER_OF_WHEELS];
     long direction_count;
     unsigned short direction;
-    long straight_velocity;
+    long translational_count;
     int i;
-
-    // 各輪の移動距離の計算
-    wheel_mm[RIGHT_WHEEL] = MM_PER_COUNT * right_encoder_difference;
-    wheel_mm[LEFT_WHEEL] = MM_PER_COUNT * left_encoder_difference;
 
     // 向きの更新
     direction_count = odometry->direction_count;
-    direction_count += wheel_mm[RIGHT_WHEEL] - wheel_mm[LEFT_WHEEL];
+    direction_count += right_encoder_difference - left_encoder_difference;
     if (direction_count < 0) {
         direction_count += DIRECTION_COUNT_MAX;
     } else if (direction_count > DIRECTION_COUNT_MAX) {
         direction_count -= DIRECTION_COUNT_MAX;
     }
-    direction =
-        (direction_count << (ODOMETFY_DIRECTION_BIT_WIDTH - MM_SHIFT_WIDTH))
-        / (DIRECTION_COUNT_MAX >> MM_SHIFT_WIDTH);
+    direction = (direction_count << 16) / DIRECTION_COUNT_MAX;
     odometry->direction_count = direction_count;
     odometry->direction = direction;
 
     // 並進速度
-    straight_velocity = (wheel_mm[RIGHT_WHEEL] + wheel_mm[LEFT_WHEEL]);
-    odometry->straight_velocity = straight_velocity;
+    translational_count = right_encoder_difference + left_encoder_difference;
 
     // 位置の更新
-    // 並進速度の計算で 2 で割らなかったぶんを、ここで割る
-    odometry->xy_count[X_AXIS] +=
-        (straight_velocity * icos(direction)) >> (MM_SHIFT_WIDTH + 1);
-    odometry->xy_count[Y_AXIS] +=
-        (straight_velocity * isin(direction)) >> (MM_SHIFT_WIDTH + 1);
+    odometry->xy_count[X_AXIS] += (translational_count * icos(direction)) >> 1;
+    odometry->xy_count[Y_AXIS] += (translational_count * isin(direction)) >> 1;
 
-    const long compare_value = (M_PER_COUNT * 2) << ISINCOS_SHIFT_WIDTH;
+    const long m_count = COUNT_PER_M << ISINCOS_SHIFT_WIDTH;
     for (i = 0; i < NUMBER_OF_AXIS; ++i) {
         long count = odometry->xy_count[i];
-        if (count >= compare_value) {
-            count -= compare_value;
+        if (count >= m_count) {
+            count -= m_count;
             ++odometry->m[i];
 
         } else if (count < 0) {
-            count += compare_value;
+            count += m_count;
             --odometry->m[i];
         }
-        odometry->mm[i] = count * 1000 / compare_value;
+        odometry->mm[i] = 1000 * count / m_count;
 
         if (odometry->m[i] >= 1000) {
             odometry->m[i] -= 1000;

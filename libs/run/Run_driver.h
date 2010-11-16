@@ -72,6 +72,8 @@ namespace qrk
           \brief 直線追従コマンド
 
           !!! 図で説明する
+
+          !!! stop_length は、指定点からの距離とする。
         */
         bool set_path_line(const qrk::Position<long>& position,
                            long stop_length);
@@ -81,10 +83,17 @@ namespace qrk
           \brief 円弧追従コマンド
 
           !!! 図で説明する
+
+          !!! start_angle と stop_angle が同じ場合は、円弧を追従し続ける。
         */
         bool set_path_circle(const qrk::Point<long>& center, long radius,
                              Circle_rotation_direction direction,
+                             const Angle& start_angle,
                              const Angle& stop_angle);
+
+
+        // !!!
+        bool set_turn_direction(const qrk::Angle& direction);
 
 
         /*!
@@ -96,11 +105,15 @@ namespace qrk
 
 
         // 移動の開始
-        // !!!
+        bool start(void);
+
+
+        // 旋回の開始
+        bool start_turn(void);
 
 
         // 移動の停止
-        // !!!
+        void stop(void);
 
 
         // 並進速度の速度、加速度を指定

@@ -70,7 +70,7 @@ void wheel_velocity_control(wheel_t *wheel)
         adjusted_mm_velocity - count2mm_velocity(count_velocity);
 
     motor_velocity_control(&wheel->motor, count_velocity,
-                           encoder_difference(&wheel->encoder));
+                           -encoder_difference(&wheel->encoder));
 }
 
 
