@@ -4,11 +4,11 @@
 
   \author Satofumi KAMIMURA
 
-  $Id: position_handler.c 1927 2010-09-26 23:09:26Z satofumi $
+  $Id: position_control.c 1927 2010-09-26 23:09:26Z satofumi $
 */
 
-#include "position_handler.h"
-#include "velocity_handler.h"
+#include "position_control.h"
+#include "velocity_control.h"
 
 
 void position_initialize(void)

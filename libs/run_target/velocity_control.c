@@ -4,10 +4,10 @@
 
   \author Satofumi KAMIMURA
 
-  $Id: velocity_handler.c 1927 2010-09-26 23:09:26Z satofumi $
+  $Id: velocity_control.c 1927 2010-09-26 23:09:26Z satofumi $
 */
 
-#include "velocity_handler.h"
+#include "velocity_control.h"
 
 
 void velocity_initialize(void)
