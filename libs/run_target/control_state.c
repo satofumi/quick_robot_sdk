@@ -65,7 +65,7 @@ static void control_task(void)
     switch (run_->run_system.mode) {
     case NORMAL_CONTROL:
         path_follow_update(&translational_velocity,
-                           &rotational_velocity, &run_->path);
+                           &rotational_velocity, &run_->path, &run_->odometry);
         body_set_velocity(run_->wheel,
                           translational_velocity, rotational_velocity);
         break;

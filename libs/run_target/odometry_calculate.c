@@ -89,3 +89,13 @@ void odometry_update(odometry_t *odometry,
         odometry->xy_count[i] = count;
     }
 }
+
+
+long odometry_current_mm(const odometry_t *odometry, int axis_index)
+{
+    long mm =
+        1000 * ((1000 * odometry->km[axis_index]) + odometry->m[axis_index]) +
+        odometry->mm[axis_index];
+
+    return mm;
+}

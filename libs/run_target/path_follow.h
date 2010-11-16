@@ -11,6 +11,7 @@
 */
 
 #include "path_t.h"
+#include "odometry_t.h"
 
 
 //! 初期化
@@ -19,7 +20,8 @@ extern void path_follow_initialize(path_t *path);
 
 // 状態の更新
 extern void path_follow_update(long *translational_velocity,
-                               long *rotational_velocity, path_t *path);
+                               long *rotational_velocity, path_t *path,
+                               const odometry_t *odometry);
 
 #endif /* !QRK_PATH_FOLLOWER_H */
 

@@ -58,18 +58,14 @@
         - \subpage path_follow_h_page
           - 直線追従
           - 円弧追従
-          - 指定した直線上で停止
           - !!!
-        - \subpage position_control_h_page
-          - 並進速
-            - 指定位置だけ進んで停止
-          - 回転速
-            - 指定された方向を向いて停止
         - \subpage velocity_control_h_page
           - 並進速
             - 等加速度から一定速度での走行
+            - 指定位置だけ進んで停止
           - 回転速
             - 等加速度から一定速度での回転
+            - 指定された方向を向いて停止
         - \subpage body_control_h_page
         - \subpage wheel_velocity_h_page
           - \subpage motor_velocity_h_page

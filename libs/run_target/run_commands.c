@@ -12,6 +12,7 @@
 #include "itoh.h"
 #include "wheel_velocity.h"
 #include "connection.h"
+#include "odometry_calculate.h"
 #include "update_parameter_id.h"
 
 
@@ -27,9 +28,7 @@ void handle_OP_command(const run_t *run)
 
     // 応答を返す
     for (i = 0; i < NUMBER_OF_AXIS; ++i) {
-        long mm =
-            1000 * ((1000 * odometry->km[i]) + odometry->m[i]) +
-            odometry->mm[i];
+        long mm = odometry_current_mm(odometry, i);
         itoh(p, mm, 4);
         p += 8;
     }

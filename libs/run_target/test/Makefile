@@ -59,7 +59,7 @@ Run_commands_test.o: Run_commands_test.h host_connection.h
 Run_commands_test.o: ../connection_utilities.h ../connection.h
 Run_commands_test.o: ../protocol_handler.h ../run_t.h ../controller_config.h
 Run_commands_test.o: ../run_system_t.h ../odometry_t.h ../path_t.h
-Run_commands_test.o: ../wheel_t.h ../encoder_t.h ../motor_t.h
+Run_commands_test.o: ../velocity_t.h ../wheel_t.h ../encoder_t.h ../motor_t.h
 connection_dummy.o: ../connection.h
 motor_table_pwm_test.o: ../motor_pwm.h ../motor_table_pwm.h
 wheel_velocity_test.o: ../wheel_velocity.c ../wheel_velocity.h ../wheel_t.h
