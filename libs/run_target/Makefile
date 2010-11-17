@@ -116,7 +116,8 @@ ring_buffer.o: ring_buffer.h
 run_commands.o: run_commands.h run_t.h controller_config.h run_system_t.h
 run_commands.o: odometry_t.h path_t.h velocity_t.h wheel_t.h encoder_t.h
 run_commands.o: motor_t.h htoi.h itoh.h wheel_velocity.h connection.h
-run_commands.o: odometry_calculate.h update_parameter_id.h
+run_commands.o: odometry_calculate.h update_parameter_id.h imask.h
+run_commands.o: interrupt_priority.h
 run_drive.o: setup_state.h run_t.h controller_config.h run_system_t.h
 run_drive.o: odometry_t.h path_t.h velocity_t.h wheel_t.h encoder_t.h
 run_drive.o: motor_t.h control_state.h

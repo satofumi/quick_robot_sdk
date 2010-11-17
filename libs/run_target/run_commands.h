@@ -17,6 +17,13 @@
 extern void handle_OP_command(const run_t *run);
 
 
+// !!!
+
+
+//! Turn to Direction
+extern void handle_TD_command(run_t *run, unsigned short target_direction);
+
+
 //! StArt
 extern void handle_SA_command(run_t *run);
 

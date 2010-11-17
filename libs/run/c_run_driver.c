@@ -38,6 +38,37 @@ static void initialize_run_driver_t(run_driver_t *run)
 }
 
 
+static int handle_no_args_command(const char *command, run_driver_t *run)
+{
+    enum {
+        RECEIVE_SIZE = 4,
+        BUFFER_SIZE = RECEIVE_SIZE + 1,
+    };
+    char buffer[BUFFER_SIZE];
+    int send_size = strlen(command);
+    int n;
+
+    // コマンドを送信
+    n = connection_write(&run->connection, command, send_size);
+    if (n != send_size) {
+        // !!! エラーメッセージの更新
+        return -1;
+    }
+
+    n = connection_read(&run->connection, buffer, RECEIVE_SIZE, run->timeout);
+    if (n != RECEIVE_SIZE) {
+        // !!! エラーメッセージの更新
+        return -1;
+    }
+
+    if (buffer[2] != '0') {
+        return -1;
+    }
+
+    return 0;
+}
+
+
 int run_driver_open(run_driver_t *run, const char *device)
 {
     int ret;
@@ -137,17 +168,15 @@ int run_set_path_line(long x_mm, long y_mm, unsigned short direction,
 
 int run_start(run_driver_t *run)
 {
-    (void)run;
-    // !!!
-    return -1;
+    const char command[] = "SA\n";
+    return handle_no_args_command(command, run);
 }
 
 
 int run_stop(run_driver_t *run)
 {
-    (void)run;
-    // !!!
-    return -1;
+    const char command[] = "ST\n";
+    return handle_no_args_command(command, run);
 }
 
 

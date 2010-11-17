@@ -49,6 +49,14 @@ void handle_OP_command(const run_t *run)
 }
 
 
+void handle_TD_command(run_t *run, unsigned short target_direction)
+{
+    (void)run;
+    (void)target_direction;
+    // !!!
+}
+
+
 void handle_SA_command(run_t *run)
 {
     unsigned char current_interrupt_priority = get_imask_exr();
