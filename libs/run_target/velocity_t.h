@@ -10,18 +10,12 @@
   $Id$
 */
 
-
-typedef enum {
-    VELOCITY_CONTROL_UNKNOWN,
-    VELOCITY_CONTROL_POSITION,  //!< 位置制御
-    VELOCITY_CONTROL_VELOCITY,  //!< 等速制御
-} velocity_mode_t;
-
+enum {
+    VELOCITY_INTERNAL_SHIFT_WIDTH = 10,
+};
 
 typedef struct
 {
-    velocity_mode_t mode;
-
     long target_velocity;
     long current_velocity;      // 1 << 10 の重さ
     long target_acceleration;

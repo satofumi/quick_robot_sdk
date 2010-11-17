@@ -4,7 +4,10 @@ CC = $(CXX)
 CXXFLAGS = -g -O0 -Wall -Werror $(INCLUDES)
 INCLUDES = -I..
 
-TARGET = wheel_velocity_test motor_table_pwm_test
+TARGET = \
+	wheel_velocity_test \
+	motor_table_pwm_test \
+	velocity_control_test \
 
 all : $(TARGET) test
 
@@ -20,10 +23,14 @@ test : all_test
 ######################################################################
 TEST_OBJS = all_test.o Connection_utilities_test.o connection_dummy.o connection_utilities.o std_string.o Run_commands_test.o protocol_handler.o run_commands.o htoi.o itoh.o isin_icos.o odometry_calculate.o
 
+
 motor_table_pwm_test : motor_table_pwm.o
 
 motor_table_pwm.o : ../motor_table_pwm.c
 	$(CXX) $(CXXFLAAGS) $< -c -o $@
+
+
+velocity_control_test : isqrt.o
 
 
 all_test : $(TEST_OBJS)
@@ -50,6 +57,9 @@ htoi.o : ../htoi.c
 itoh.o : ../itoh.c
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
+isqrt.o : ../isqrt.c
+	$(CXX) $(CXXFLAGS) $< -c -o $@
+
 isin_icos.o : ../isin_icos.c
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
@@ -68,6 +78,8 @@ Run_commands_test.o: ../run_system_t.h ../odometry_t.h ../path_t.h
 Run_commands_test.o: ../velocity_t.h ../wheel_t.h ../encoder_t.h ../motor_t.h
 connection_dummy.o: ../connection.h
 motor_table_pwm_test.o: ../motor_pwm.h ../motor_table_pwm.h
+velocity_control_test.o: ../velocity_control.c ../velocity_control.h
+velocity_control_test.o: ../velocity_t.h ../isqrt.h
 wheel_velocity_test.o: ../wheel_velocity.c ../wheel_velocity.h ../wheel_t.h
 wheel_velocity_test.o: ../encoder_t.h ../motor_t.h ../robot_parameter.h
 wheel_velocity_test.o: ../encoder_reader.h ../motor_velocity.h ../motor_pwm.h

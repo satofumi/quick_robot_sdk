@@ -41,6 +41,7 @@ programs/run_urg_wired_recorder/run_urg_wired_recorder
 all_test
 libs/run_target/test/wheel_velocity_test
 libs/run_target/test/motor_table_pwm_test
+libs/run_target/test/velocity_control_test
 
 */run_target/iatan2.c
 */run_target/iatan2.h
