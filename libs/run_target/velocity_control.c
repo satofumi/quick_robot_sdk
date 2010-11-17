@@ -11,8 +11,6 @@
 #include "isqrt.h"
 #include "robot_parameter.h"
 
-//#include <stdio.h>
-
 
 void velocity_initialize(velocity_t *velocity)
 {

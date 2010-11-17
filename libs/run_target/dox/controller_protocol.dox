@@ -23,13 +23,20 @@
 
   \section controller_protocol_path 走行経路の指示 (記述中)
 
+  !!! 直線追従
 
-  !!!
+  !!! 円弧追従
+
+  !!! 指定した方向を向く
 
 
   \section controller_protocol_velocity 移動速度の指示 (記述中)
 
-  !!!
+  !!! 移動の開始
+
+  !!! 移動の停止
+
+  !!! 旋回の開始
 
 
   \section controller_protocol_parameter パラメータの設定と取得 (記述中)

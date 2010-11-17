@@ -12,9 +12,10 @@
 #include "motor_table_pwm.h"
 #include "encoder_reader.h"
 
+
 enum {
-    DEFAULT_GAIN_P = 64,        /* 1/1 の重さ */
-    DEFAULT_GAIN_I = 128,       /* 1/256 の重さ */
+    DEFAULT_GAIN_P = 48,        /* 1/1 の重さ */
+    DEFAULT_GAIN_I = 64,        /* 1/256 の重さ */
     GAIN_I_SHIFT = 8,
 };
 

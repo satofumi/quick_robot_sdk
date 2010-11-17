@@ -18,6 +18,9 @@ typedef enum {
     Unknown_Command,
     OP_Command,
     // !!!
+    SA_Command,
+    ST_Command,
+    // !!!
     WV_Command,                 //!< 車輪速の制御
 } command_type_t;
 
@@ -34,6 +37,10 @@ typedef struct
 static command_packet_t command_packets_[] = {
     // !!!
     { OP_Command, "OP", 2, 2, },
+    // !!!
+    { SA_Command, "SA", 2, 2, },
+    { ST_Command, "ST", 2, 2, },
+    // !!!
     { WV_Command, "WV", 2, 7, },
 };
 
@@ -83,6 +90,14 @@ void protocol_update(run_t *run)
 
     case OP_Command:
         handle_OP_command(run);
+        break;
+
+    case SA_Command:
+        handle_SA_command(run);
+        break;
+
+    case ST_Command:
+        handle_ST_command(run);
         break;
 
     case WV_Command:

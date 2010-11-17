@@ -32,9 +32,8 @@ typedef struct
     long km[NUMBER_OF_AXIS];
 
     // 速度情報
-    //long straight_velocity;
-    // !!!
-
+    long translational_velocity;
+    long rotational_velocity;
 } odometry_t;
 
 #endif /* !QRK_ODOMETRY_T_H */

@@ -18,12 +18,7 @@
   初期状態では、割り込みマスクの設定を最大に設定し、割り込みが発生しないようにする。
 */
 extern void imask_initialize(void);
-
-#if defined(HOST_COMPILE)
 extern void set_imask_exr(unsigned char level);
 extern unsigned char get_imask_exr(void);
-#endif
-
-// !!!
 
 #endif /* !QRK_IMASK_H */

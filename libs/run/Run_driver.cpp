@@ -125,14 +125,18 @@ long Run_driver::path_length_to_target(void) const
 
 bool Run_driver::start(void)
 {
-    // !!!
-    return false;
+    if (run_start(&pimpl->run_) != 0) {
+        // !!!
+        return false;
+    }
+
+    return true;
 }
 
 
 void Run_driver::stop(void)
 {
-    // !!!
+    run_stop(&pimpl->run_);
 }
 
 

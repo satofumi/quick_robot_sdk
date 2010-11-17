@@ -26,7 +26,9 @@ void odometry_initialize(odometry_t *odometry)
         odometry->mm[i] = 0;
         odometry->km[i] = 0;
     }
-    //odometry->translational_velocity = 0;
+
+    odometry->translational_velocity = 0;
+    odometry->rotational_velocity = 0;
 }
 
 
@@ -88,6 +90,11 @@ void odometry_update(odometry_t *odometry,
         }
         odometry->xy_count[i] = count;
     }
+
+    // 速度の計算
+    // !!! 仮実装
+    odometry->translational_velocity = 0;
+    odometry->rotational_velocity = 0;
 }
 
 
@@ -102,10 +109,14 @@ long odometry_current_mm(const odometry_t *odometry, int axis_index)
 
 
 long odometry_direction_difference(const odometry_t *odometry,
-                                   long target_direction)
+                                   unsigned short target_direction)
 {
-    (void)odometry;
-    (void)target_direction;
-    // !!!
-    return -1;
+    long diff = target_direction - odometry->direction;
+
+    if (diff > (0xffff >> 1)) {
+        diff -= 0xfff;
+    } else if (diff < -(0xffff >> 1)) {
+        diff += 0xfff;
+    }
+    return diff;
 }

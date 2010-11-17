@@ -22,14 +22,16 @@ void path_follow_initialize(path_t *path)
 
     path->default_translational_velocity = DEFAULT_TRANSLATIONAL_VELOCITY;
     path->default_rotational_velocity = DEFAULT_ROTATIONAL_VELOCITY;
-    path->default_transrational_acceleration =
+    path->translational_control.target_acceleration =
         DEFAULT_TRANSLATIONAL_ACCELERATION;
-    path->default_rotational_acceleration = DEFAULT_ROTATIONAL_ACCELERATION;
+    path->rotational_control.target_acceleration =
+        DEFAULT_ROTATIONAL_ACCELERATION;
 
     velocity_initialize(&path->translational_control);
     velocity_initialize(&path->rotational_control);
 
     // !!! マクロにする
+    // !!! 任意の距離を指定できるようにすべき
     path->follow_radius_shift_width = 10;
 
     path->point_x = 0;
@@ -94,7 +96,10 @@ void path_follow_update(long *translational_velocity,
 
     if (!path->is_controlling) {
         // 左右輪の速度がゼロになるように制御する
-        // 速度がゼロのままこのモジュールを抜ける
+        *translational_velocity =
+            velocity_standard_velocity(&path->translational_control);
+        *rotational_velocity =
+            velocity_standard_velocity(&path->rotational_control);
 
     } else {
         long left_length;

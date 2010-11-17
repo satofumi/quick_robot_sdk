@@ -135,6 +135,22 @@ int run_set_path_line(long x_mm, long y_mm, unsigned short direction,
 }
 
 
+int run_start(run_driver_t *run)
+{
+    (void)run;
+    // !!!
+    return -1;
+}
+
+
+int run_stop(run_driver_t *run)
+{
+    (void)run;
+    // !!!
+    return -1;
+}
+
+
 void run_stop_module(void)
 {
     // !!!

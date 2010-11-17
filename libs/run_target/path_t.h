@@ -30,8 +30,6 @@ typedef struct
 
     long default_translational_velocity; //!< 並進の目標速度のデフォルト値
     long default_rotational_velocity; //!< 回転の目標速度のデフォルト値
-    long default_transrational_acceleration;
-    long default_rotational_acceleration;
 
     velocity_t translational_control;
     velocity_t rotational_control;

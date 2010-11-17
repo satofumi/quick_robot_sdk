@@ -17,9 +17,11 @@ void imask_initialize(void)
 }
 
 
-#if defined(HOST_COMPILE)
 void set_imask_exr(unsigned char level)
 {
+#if defined(HOST_COMPILE)
+    (void)level;
+#else
   unsigned short sr_register;
 
   level <<= 4;
@@ -31,11 +33,15 @@ void set_imask_exr(unsigned char level)
   sr_register = sr_register | level;
 
   asm("ldc %0, sr"::"r"(sr_register));
+#endif
 }
 
 
 unsigned char get_imask_exr(void)
 {
+#if defined(HOST_COMPILE)
+    return 0;
+#else
   unsigned long mask;
 
   asm("stc sr, %0": "=r"(mask):);
@@ -43,5 +49,5 @@ unsigned char get_imask_exr(void)
   mask >>= 4;
 
   return mask;
-}
 #endif
+}

@@ -17,6 +17,14 @@
 extern void handle_OP_command(const run_t *run);
 
 
+//! StArt
+extern void handle_SA_command(run_t *run);
+
+
+//! STop
+extern void handle_ST_command(run_t *run);
+
+
 //! Set Parameter
 extern void handle_SP_command(run_t *run, const char *line_buffer);
 
