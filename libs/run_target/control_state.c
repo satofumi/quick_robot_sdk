@@ -71,7 +71,7 @@ static void control_task(void)
         break;
 
     case DIRECT_WHEEL_CONTROL:
-        // 何もしない
+        // 何も変更しない
         break;
     }
 

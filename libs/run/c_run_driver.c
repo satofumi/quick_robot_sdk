@@ -242,8 +242,6 @@ int run_set_wheel_velocity(run_driver_t *run, int wheel_id, short mm_per_sec)
     snprintf(buffer, BUFFER_SIZE, "WV%d%04x\n", wheel_id,
              (unsigned short)mm_per_sec);
 
-    buffer[SEND_SIZE - 1] = '\n';
-
     n = connection_write(&run->connection, buffer, SEND_SIZE);
     if (n != SEND_SIZE) {
         // !!! エラーメッセージの更新

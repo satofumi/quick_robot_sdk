@@ -68,7 +68,6 @@ int main(void)
         motor_pwm_set_duty(i, MOTOR_PWM_CW, DUTY);
     }
 
-
     while (1) {
         wait();
         output();

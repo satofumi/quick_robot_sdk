@@ -6,7 +6,7 @@ include $(SOURCE_DIR)/build_rule.mk
 
 RUBY = ruby
 
-CFLAGS_FOR_BUILD = -DHOST_COMPILE -O2 -m2 -Wall -Werror -W $(INCLUDES_FOR_BUILD)
+CFLAGS_FOR_BUILD = -O2 -m2 -Wall -Werror -W $(INCLUDES_FOR_BUILD)
 INCLUDES_FOR_BUILD =
 LDFLAGS_FOR_BUILD = -nostartfiles $(START_UP_FOR_BUILD)
 LDLIBS_FOR_BUILD = -L/usr/share/gnush/lib/gcc/sh-elf/4.5-GNUSH_v10.03/mrenesas/m2/ -lgcc-Os-4-200

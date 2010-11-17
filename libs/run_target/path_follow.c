@@ -90,16 +90,10 @@ void path_follow_update(long *translational_velocity,
                         long *rotational_velocity, path_t *path,
                         const odometry_t *odometry)
 {
-    // 指定がない場合は、左右輪の速度がゼロになるように制御する
-    *translational_velocity = 0;
-    *rotational_velocity = 0;
-
     if (!path->is_controlling) {
         // 左右輪の速度がゼロになるように制御する
-        *translational_velocity =
-            velocity_standard_velocity(&path->translational_control);
-        *rotational_velocity =
-            velocity_standard_velocity(&path->rotational_control);
+        *translational_velocity = 0;
+        *rotational_velocity = 0;
 
     } else {
         long left_length;
@@ -130,6 +124,8 @@ void path_follow_update(long *translational_velocity,
             break;
 
         case PATH_TURN_TO_DIRECTION:
+            *translational_velocity = 0;
+
             // 指定した方向を向く
             direction_diff =
                 odometry_direction_difference(odometry, path->point_direction);
@@ -139,6 +135,8 @@ void path_follow_update(long *translational_velocity,
             break;
 
         case PATH_UNKNOWN:
+            *translational_velocity = 0;
+            *rotational_velocity = 0;
             break;
         }
     }
