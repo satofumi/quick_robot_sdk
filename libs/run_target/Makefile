@@ -9,8 +9,10 @@ RUBY = ruby
 CFLAGS_FOR_BUILD = -O2 -m2 -Wall -Werror -W $(INCLUDES_FOR_BUILD)
 INCLUDES_FOR_BUILD =
 LDFLAGS_FOR_BUILD = -nostartfiles $(START_UP_FOR_BUILD)
-LDLIBS_FOR_BUILD = -L/usr/share/gnush/lib/gcc/sh-elf/4.5-GNUSH_v10.03/mrenesas/m2/ -lgcc-Os-4-200
-#LDLIBS_FOR_BUILD =
+#LDLIBS_FOR_BUILD = -L/usr/share/gnush/lib/gcc/sh-elf/4.5-GNUSH_v10.03/mrenesas/m2/ -lgcc-Os-4-200
+#LDLIBS_FOR_BUILD = -L/usr/share/gnush/lib/gcc/sh-elf/4.5-GNUSH_v10.03/mrenesas/m2/ -lgcc
+#LDLIBS_FOR_BUILD = -L/usr/share/gnush/lib/gcc/sh-elf/lib/gcc/sh-elf/4.3.1/ml/m2 -lgcc -lgcc-Os-4-200
+LDLIBS_FOR_BUILD =
 
 START_UP_FOR_BUILD = $(SOURCE_DIR)/crt0.S
 LD_LOAD_FOR_BUILD = $(SOURCE_DIR)/aki_sh7125_load.x
@@ -34,7 +36,7 @@ depend :
 
 .PHONY : all clean html upload
 ######################################################################
-run_drive.mot run_drive.rom run_drive.dis : run_drive.o setup_state.o control_state.o pause_state.o clock_initialize.o imask.o run_system.o connection.o connection_utilities.o protocol_handler.o sci_interrupt_read_write.o emergency_io_control.o timer_control.o path_follow.o velocity_control.o body_control.o wheel_velocity.o motor_velocity.o motor_table_pwm.o motor_pwm.o encoder_reader.o odometry_calculate.o mtu2_initialize.o ring_buffer.o run_commands.o htoi.o itoh.o isin_icos.o isqrt.o #iatan2.o
+run_drive.mot run_drive.rom run_drive.dis : run_drive.o setup_state.o control_state.o pause_state.o clock_initialize.o imask.o run_system.o connection.o connection_utilities.o protocol_handler.o sci_interrupt_read_write.o emergency_io_control.o timer_control.o wheel_velocity.o odometry_calculate.o body_control.o motor_velocity.o motor_table_pwm.o motor_pwm.o encoder_reader.o mtu2_initialize.o ring_buffer.o run_commands.o isin_icos.o itoh.o htoi.o path_follow.o velocity_control.o isqrt.o #iatan2.o
 
 isin_icos.c : create_isin_icos.rb
 	$(RUBY) $< > $@ || $(RM) $@

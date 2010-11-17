@@ -64,8 +64,14 @@ static long follow_line_rotational_velocity(path_t *path,
         path->follow_radius_shift_width - ISINCOS_SHIFT_WIDTH;
 
     // 追従直線との距離計算
+#if 0
     d = ((path->line_a * x) + (path->line_b * y) + path->line_c) /
         path->line_sqrt_a_square_plus_b_square;
+#else
+    (void)x;
+    (void)y;
+    d = 0;
+#endif
     abs_d = (d < 0) ? -d : d;
 
     // 直線に追従する方向の導出

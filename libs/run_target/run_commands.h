@@ -19,7 +19,6 @@ extern void handle_OP_command(const run_t *run);
 
 // !!!
 
-
 //! Turn to Direction
 extern void handle_TD_command(run_t *run, const char *line_buffer);
 

@@ -64,6 +64,8 @@ static void control_task(void)
     // 走行経路の指示
     switch (run_->run_system.mode) {
     case NORMAL_CONTROL:
+        (void)translational_velocity;
+        (void)rotational_velocity;
         path_follow_update(&translational_velocity,
                            &rotational_velocity, &run_->path, &run_->odometry);
         body_set_velocity(run_->wheel,

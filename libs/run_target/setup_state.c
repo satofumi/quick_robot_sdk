@@ -5,6 +5,8 @@
   \author Satofumi KAMIMURA
 
   $Id: setup_state.c 1927 2010-09-26 23:09:26Z satofumi $
+
+  \todo control_state.c と setup_state.c をまとめる
 */
 
 #include "setup_state.h"

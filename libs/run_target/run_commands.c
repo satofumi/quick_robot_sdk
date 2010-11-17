@@ -38,14 +38,17 @@ void handle_OP_command(const run_t *run)
     char *p = &response[DATA_FIRST];
     const odometry_t *odometry = &run->odometry;
     int i;
+    unsigned char current_interrupt_priority = get_imask_exr();
 
     // 応答を返す
+    set_imask_exr(INTERRUPT_PRIORITY_ALL_MASK);
     for (i = 0; i < NUMBER_OF_AXIS; ++i) {
         long mm = odometry_current_mm(odometry, i);
         itoh(p, mm, 4);
         p += 8;
     }
     itoh(p, run->odometry.direction, 2);
+    set_imask_exr(current_interrupt_priority);
 
     connection_write(response, 25);
 }
