@@ -24,7 +24,7 @@
       - 環境データからのマップ作成
     \n \n
     - <b>ジョイスティックでのロボット操作</b>
-      - \subpage run_wired_controller_cpp_page
+      - \subpage run_joystick_control_h_page
 
   - <b>ライブラリ</b>
     - <b>走行モジュール・ホスト側</b>

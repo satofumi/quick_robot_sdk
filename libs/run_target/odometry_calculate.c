@@ -99,3 +99,13 @@ long odometry_current_mm(const odometry_t *odometry, int axis_index)
 
     return mm;
 }
+
+
+long odometry_direction_difference(const odometry_t *odometry,
+                                   long target_direction)
+{
+    (void)odometry;
+    (void)target_direction;
+    // !!!
+    return -1;
+}

@@ -36,6 +36,8 @@ typedef struct
     velocity_t translational_control;
     velocity_t rotational_control;
 
+    long follow_radius_shift_width;
+
     long point_x;
     long point_y;
     long point_direction;

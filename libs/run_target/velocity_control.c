@@ -19,6 +19,16 @@ void velocity_initialize(velocity_t *velocity)
 }
 
 
+long velocity_standard_velocity(velocity_t *velocity,
+                                long target_standard_velocity)
+{
+    (void)velocity;
+    (void)target_standard_velocity;
+    // !!!
+    return -1;
+}
+
+
 long velocity_stop_to_position(velocity_t *velocity, long length)
 {
     // !!! v^2 = 2al

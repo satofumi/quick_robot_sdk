@@ -27,7 +27,12 @@ extern void odometry_update(odometry_t *odometry,
                             int right_encoder_difference,
                             int left_encoder_difference);
 
+
 extern long odometry_current_mm(const odometry_t *odometry, int axis_index);
+
+
+extern long odometry_direction_difference(const odometry_t *odometry,
+                                          long target_direction);
 
 #endif /* !QRK_ODOMETRY_CALCULATE_H */
 

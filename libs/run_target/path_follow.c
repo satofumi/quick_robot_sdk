@@ -12,6 +12,7 @@
 #include "robot_parameter.h"
 #include "isqrt.h"
 #include "odometry_calculate.h"
+#include "isin_icos.h"
 
 
 void path_follow_initialize(path_t *path)
@@ -27,6 +28,9 @@ void path_follow_initialize(path_t *path)
 
     velocity_initialize(&path->translational_control);
     velocity_initialize(&path->rotational_control);
+
+    // !!! マクロにする
+    path->follow_radius_shift_width = 10;
 
     path->point_x = 0;
     path->point_y = 0;
@@ -45,21 +49,35 @@ void path_follow_initialize(path_t *path)
 static long follow_line_rotational_velocity(path_t *path,
                                             const odometry_t* odometry)
 {
+    enum {
+        VERTICLE_DIRECTION = 0xffff >> 2,
+    };
     long x = odometry_current_mm(odometry, X_AXIS);
     long y = odometry_current_mm(odometry, Y_AXIS);
     long d;
+    long abs_d;
     long target_direction;
     long direction_diff;
+    const int shift_width_diff =
+        path->follow_radius_shift_width - ISINCOS_SHIFT_WIDTH;
 
     // 追従直線との距離計算
     d = ((path->line_a * x) + (path->line_b * y) + path->line_c) /
         path->line_sqrt_a_square_plus_b_square;
+    abs_d = (d < 0) ? -d : d;
 
     // 直線に追従する方向の導出
-    // !!!
-    target_direction = -1;
-    // !!!
-    direction_diff = 0 - odometry->direction;
+    if (abs_d > (1 << path->follow_radius_shift_width)) {
+        // 追従直線との距離が遠い場合、追従直線に向かう垂直な方向を向かせる
+        target_direction = (d > 0) ? -VERTICLE_DIRECTION : +VERTICLE_DIRECTION;
+
+    } else {
+        // 追従直線に漸近するような方向を向かせる
+        target_direction = (shift_width_diff >= 0)
+            ? d << shift_width_diff : d >> -shift_width_diff;
+    }
+
+    direction_diff = odometry_direction_difference(odometry, target_direction);
 
     // 指定された方向を向くための速度の導出
     return velocity_stop_to_position(&path->rotational_control, direction_diff);
@@ -108,12 +126,8 @@ void path_follow_update(long *translational_velocity,
 
         case PATH_TURN_TO_DIRECTION:
             // 指定した方向を向く
-            direction_diff = path->point_direction - odometry->direction;
-            if (direction_diff < -(0xffff >> 1)) {
-                direction_diff += 0xffff;
-            } else if (direction_diff > +(0xffff >> 1)) {
-                direction_diff -= 0xffff;
-            }
+            direction_diff =
+                odometry_direction_difference(odometry, path->point_direction);
             *rotational_velocity =
                 velocity_stop_to_position(&path->rotational_control,
                                           direction_diff);
