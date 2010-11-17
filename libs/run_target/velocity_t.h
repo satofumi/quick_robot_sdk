@@ -23,7 +23,7 @@ typedef struct
     velocity_mode_t mode;
 
     long target_velocity;
-    long current_velocity;
+    long current_velocity;      // 1 << 10 の重さ
     long target_acceleration;
 } velocity_t;
 

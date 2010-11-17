@@ -18,8 +18,7 @@ extern void velocity_initialize(velocity_t *velocity);
 
 
 // 等加速度で一定速度まで加速するための速度の計算
-extern long velocity_standard_velocity(velocity_t *velocity,
-                                       long target_standard_velocity);
+extern long velocity_standard_velocity(velocity_t *velocity);
 
 
 //! 指定距離だけ移動して停止するための速度の計算
