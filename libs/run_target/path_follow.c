@@ -70,7 +70,7 @@ static long follow_line_rotational_velocity(path_t *path,
 #else
     (void)x;
     (void)y;
-    d = 0;
+    d = y;
 #endif
     abs_d = (d < 0) ? -d : d;
 

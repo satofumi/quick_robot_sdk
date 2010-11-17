@@ -66,7 +66,7 @@ void handle_TD_command(run_t *run, const char *line_buffer)
     unsigned char current_interrupt_priority = get_imask_exr();
 
     // 向きの読み出し
-    target_direction = htoi(&line_buffer[DIRECTION_INDEX], 4);
+    target_direction = htoi(&line_buffer[DIRECTION_INDEX], RESPONSE_SIZE);
 
     set_imask_exr(INTERRUPT_PRIORITY_ALL_MASK);
 
@@ -89,6 +89,7 @@ void handle_SA_command(run_t *run)
     set_imask_exr(INTERRUPT_PRIORITY_ALL_MASK);
 
     // モードを変更し、目標速度を設定する
+    run->run_system.mode = NORMAL_CONTROL;
     run->path.is_controlling = 1;
     run->path.translational_control.target_velocity =
         run->path.default_translational_velocity;
