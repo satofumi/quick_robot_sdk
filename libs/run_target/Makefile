@@ -104,7 +104,7 @@ odometry_calculate.o: odometry_calculate.h odometry_t.h robot_parameter.h
 odometry_calculate.o: controller_config.h isin_icos.h
 path_follow.o: path_follow.h path_t.h velocity_t.h odometry_t.h
 path_follow.o: velocity_control.h robot_parameter.h isqrt.h
-path_follow.o: odometry_calculate.h
+path_follow.o: odometry_calculate.h isin_icos.h
 pause_state.o: pause_state.h run_t.h controller_config.h run_system_t.h
 pause_state.o: odometry_t.h path_t.h velocity_t.h wheel_t.h encoder_t.h
 pause_state.o: motor_t.h emergency_io_control.h wheel_velocity.h
@@ -133,7 +133,7 @@ setup_state.o: path_follow.h wheel_velocity.h protocol_handler.h
 setup_state.o: interrupt_priority.h
 std_string.o: std_string.h
 timer_control.o: timer_control.h cpu_clock.h
-velocity_control.o: velocity_control.h velocity_t.h
+velocity_control.o: velocity_control.h velocity_t.h isqrt.h
 wheel_velocity.o: wheel_velocity.h wheel_t.h encoder_t.h motor_t.h
 wheel_velocity.o: robot_parameter.h encoder_reader.h motor_velocity.h
 wheel_velocity.o: motor_pwm.h

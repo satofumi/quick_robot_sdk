@@ -18,7 +18,7 @@ test : all_test
 	./all_test
 
 ######################################################################
-TEST_OBJS = all_test.o Connection_utilities_test.o connection_dummy.o connection_utilities.o std_string.o Run_commands_test.o protocol_handler.o run_commands.o htoi.o itoh.o
+TEST_OBJS = all_test.o Connection_utilities_test.o connection_dummy.o connection_utilities.o std_string.o Run_commands_test.o protocol_handler.o run_commands.o htoi.o itoh.o isin_icos.o odometry_calculate.o
 
 motor_table_pwm_test : motor_table_pwm.o
 
@@ -48,6 +48,12 @@ htoi.o : ../htoi.c
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
 itoh.o : ../itoh.c
+	$(CXX) $(CXXFLAGS) $< -c -o $@
+
+isin_icos.o : ../isin_icos.c
+	$(CXX) $(CXXFLAGS) $< -c -o $@
+
+odometry_calculate.o : ../odometry_calculate.c
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
 # DO NOT DELETE

@@ -2,7 +2,7 @@
 
 GENERATED_HTML = generated_html
 
-all : html samples
+all : html samples test
 	cd libs/ && $(MAKE)
 	cd programs/ && $(MAKE)
 
@@ -19,6 +19,8 @@ samples :
 	cd libs/lidar/samples/ && $(MAKE)
 	cd programs/run_path_follower/samples/ && $(MAKE)
 
+test :
+	cd libs/run_target/test/ && $(MAKE)
 
 html : $(GENERATED_HTML)/index.html
 
