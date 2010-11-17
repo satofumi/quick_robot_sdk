@@ -41,8 +41,8 @@ static void initialize_run_driver_t(run_driver_t *run)
 static int handle_no_args_command(const char *command, run_driver_t *run)
 {
     enum {
-        RECEIVE_SIZE = 4,
-        BUFFER_SIZE = RECEIVE_SIZE + 1,
+        READ_SIZE = 4,
+        BUFFER_SIZE = READ_SIZE + 1,
     };
     char buffer[BUFFER_SIZE];
     int send_size = strlen(command);
@@ -55,8 +55,8 @@ static int handle_no_args_command(const char *command, run_driver_t *run)
         return -1;
     }
 
-    n = connection_read(&run->connection, buffer, RECEIVE_SIZE, run->timeout);
-    if (n != RECEIVE_SIZE) {
+    n = connection_read(&run->connection, buffer, READ_SIZE, run->timeout);
+    if (n != READ_SIZE) {
         // !!! エラーメッセージの更新
         return -1;
     }
@@ -112,7 +112,7 @@ int run_position(run_driver_t *run,
     enum {
         BUFFER_SIZE = 26,
         SEND_SIZE = 3,
-        RECEIVE_SIZE = 25,
+        READ_SIZE = 25,
         DATA_FIRST = 4,
     };
     char buffer[BUFFER_SIZE] = "OP0\nxxxxxxxxyyyyyyyydddd\n";
@@ -130,8 +130,8 @@ int run_position(run_driver_t *run,
         return -1;
     }
 
-    n = connection_read(&run->connection, buffer, RECEIVE_SIZE, run->timeout);
-    if (n != RECEIVE_SIZE) {
+    n = connection_read(&run->connection, buffer, READ_SIZE, run->timeout);
+    if (n != READ_SIZE) {
         // !!! エラーメッセージの更新
         return -1;
     }
@@ -166,6 +166,35 @@ int run_set_path_line(long x_mm, long y_mm, unsigned short direction,
 }
 
 
+int run_set_stop_direction(run_driver_t *run, unsigned short direction)
+{
+    enum {
+        SEND_SIZE = 7,
+        READ_SIZE = 4,
+        BUFFER_SIZE = READ_SIZE + 1,
+    };
+    char command[] = "TDxxxx\n";
+    char buffer[BUFFER_SIZE];
+    int n;
+
+    snprintf(command, strlen(command) + 1, "TD%04x\n", direction);
+
+    n = connection_write(&run->connection, command, SEND_SIZE);
+    if (n != SEND_SIZE) {
+        // !!!
+        return -1;
+    }
+
+    n = connection_read(&run->connection, buffer, READ_SIZE, run->timeout);
+    if (n != READ_SIZE) {
+        // !!!
+        return -1;
+    }
+
+    return 0;
+}
+
+
 int run_start(run_driver_t *run)
 {
     const char command[] = "SA\n";
@@ -195,9 +224,9 @@ void run_resume_module(void)
 int run_set_wheel_velocity(run_driver_t *run, int wheel_id, short mm_per_sec)
 {
     enum {
-        BUFFER_SIZE = 9,
         SEND_SIZE = 8,
-        RECEIVE_SIZE = 4,
+        BUFFER_SIZE = SEND_SIZE + 1,
+        READ_SIZE = 4,
     };
     char buffer[BUFFER_SIZE] = "WVivvvv\n";
     int n;
@@ -222,8 +251,8 @@ int run_set_wheel_velocity(run_driver_t *run, int wheel_id, short mm_per_sec)
     }
 
     // 応答を受信
-    n = connection_read(&run->connection, buffer, RECEIVE_SIZE, run->timeout);
-    if (n != RECEIVE_SIZE) {
+    n = connection_read(&run->connection, buffer, READ_SIZE, run->timeout);
+    if (n != READ_SIZE) {
         // !!! エラーメッセージの更新
         return -1;
     }

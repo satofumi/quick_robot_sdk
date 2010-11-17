@@ -29,6 +29,8 @@ static void set_current_velocity(run_t *run)
 
 void handle_OP_command(const run_t *run)
 {
+    // !!! タイムスタンプを含めるようにする
+
     enum {
         DATA_FIRST = 4,
     };
@@ -49,16 +51,37 @@ void handle_OP_command(const run_t *run)
 }
 
 
-void handle_TD_command(run_t *run, unsigned short target_direction)
+void handle_TD_command(run_t *run, const char *line_buffer)
 {
-    (void)run;
-    (void)target_direction;
-    // !!!
+    enum {
+        DIRECTION_INDEX = 2,
+
+        RESPONSE_SIZE = 4,
+    };
+    unsigned short target_direction;
+    const char response[] = "TD0\n";
+    unsigned char current_interrupt_priority = get_imask_exr();
+
+    // 向きの読み出し
+    target_direction = htoi(&line_buffer[DIRECTION_INDEX], 4);
+
+    set_imask_exr(INTERRUPT_PRIORITY_ALL_MASK);
+
+    // モードの変更と向きの設定
+    run->path.mode = PATH_TURN_TO_DIRECTION;
+    run->path.point_direction = target_direction;
+    set_imask_exr(current_interrupt_priority);
+
+    connection_write(response, RESPONSE_SIZE);
 }
 
 
 void handle_SA_command(run_t *run)
 {
+    enum {
+        RESPONSE_SIZE = 4,
+    };
+    const char response[] = "SA0\n";
     unsigned char current_interrupt_priority = get_imask_exr();
     set_imask_exr(INTERRUPT_PRIORITY_ALL_MASK);
 
@@ -71,13 +94,18 @@ void handle_SA_command(run_t *run)
 
     // 現在速度を設定する
     set_current_velocity(run);
-
     set_imask_exr(current_interrupt_priority);
+
+    connection_write(response, RESPONSE_SIZE);
 }
 
 
 void handle_ST_command(run_t *run)
 {
+    enum {
+        RESPONSE_SIZE = 4,
+    };
+    const char response[] = "ST0\n";
     unsigned char current_interrupt_priority = get_imask_exr();
     set_imask_exr(INTERRUPT_PRIORITY_ALL_MASK);
 
@@ -88,8 +116,9 @@ void handle_ST_command(run_t *run)
 
     // 現在速度を設定する
     set_current_velocity(run);
-
     set_imask_exr(current_interrupt_priority);
+
+    connection_write(response, RESPONSE_SIZE);
 }
 
 
@@ -109,14 +138,22 @@ void handle_SP_command(run_t *run, const char *line_buffer)
 
 void handle_WV_command(run_t *run, const char *line_buffer)
 {
+    enum {
+        ID_INDEX = 2,
+        ID_SIZE = 1,
+        VELOCITY_INDEX = ID_INDEX + ID_SIZE,
+        VELOCITY_SIZE = 4,
+
+        RESPONSE_SIZE = 4,
+    };
     int id;
     short velocity;
     char response[] = "WV0\n";
     unsigned char current_interrupt_priority = get_imask_exr();
 
     // パラメータの読み出し
-    id = htoi(&line_buffer[2], 1);
-    velocity = htoi(&line_buffer[3], 4);
+    id = htoi(&line_buffer[ID_INDEX], ID_SIZE);
+    velocity = htoi(&line_buffer[VELOCITY_INDEX], VELOCITY_SIZE);
 
     // !!! パースに失敗したら、エラー応答を返すようにするべき
 
@@ -130,5 +167,5 @@ void handle_WV_command(run_t *run, const char *line_buffer)
         response[2] = '2';
     }
 
-    connection_write(response, 4);
+    connection_write(response, RESPONSE_SIZE);
 }

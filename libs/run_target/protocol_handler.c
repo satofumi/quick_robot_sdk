@@ -18,6 +18,7 @@ typedef enum {
     Unknown_Command,
     OP_Command,
     // !!!
+    TD_Command,
     SA_Command,
     ST_Command,
     // !!!
@@ -38,6 +39,7 @@ static command_packet_t command_packets_[] = {
     // !!!
     { OP_Command, "OP", 2, 2, },
     // !!!
+    { TD_Command, "TD", 2, 6, },
     { SA_Command, "SA", 2, 2, },
     { ST_Command, "ST", 2, 2, },
     // !!!
@@ -90,6 +92,10 @@ void protocol_update(run_t *run)
 
     case OP_Command:
         handle_OP_command(run);
+        break;
+
+    case TD_Command:
+        handle_TD_command(run, line_buffer);
         break;
 
     case SA_Command:
