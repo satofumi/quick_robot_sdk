@@ -79,7 +79,7 @@ Run_commands_test.o: ../velocity_t.h ../wheel_t.h ../encoder_t.h ../motor_t.h
 connection_dummy.o: ../connection.h
 motor_table_pwm_test.o: ../motor_pwm.h ../motor_table_pwm.h
 velocity_control_test.o: ../velocity_control.c ../velocity_control.h
-velocity_control_test.o: ../velocity_t.h ../isqrt.h
+velocity_control_test.o: ../velocity_t.h ../isqrt.h ../robot_parameter.h
 wheel_velocity_test.o: ../wheel_velocity.c ../wheel_velocity.h ../wheel_t.h
 wheel_velocity_test.o: ../encoder_t.h ../motor_t.h ../robot_parameter.h
 wheel_velocity_test.o: ../encoder_reader.h ../motor_velocity.h ../motor_pwm.h

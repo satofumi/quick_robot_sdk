@@ -11,6 +11,8 @@
 #include "isqrt.h"
 #include "robot_parameter.h"
 
+//#include <stdio.h>
+
 
 void velocity_initialize(velocity_t *velocity)
 {
@@ -50,28 +52,34 @@ long velocity_standard_velocity(velocity_t *velocity)
 
 long velocity_stop_to_position(velocity_t *velocity, long length)
 {
-    long a = velocity->target_acceleration;
-    long abs_a = (a > 0) ? a : -a;
-    long abs_v = isqrt(abs_a * length << 1);
+    // v^2 = 2al
+    long a = velocity->target_acceleration << 1;
     long v;
+    const long target_velocity = velocity->target_velocity;
+    long original_target_velocity;
+    long return_velocity;
 
-    if (a > 0) {
-        v = abs_v;
+    if (length > 0) {
+        v = isqrt(a * length);
     } else {
-        v = -abs_v;
+        v = -isqrt(a * -length);
     }
 
     // 目標速度よりも速くならないようにする
-    if (velocity->target_velocity >= 0) {
-        if (v > velocity->target_velocity) {
-            v = velocity->target_velocity;
+    if (target_velocity >= 0) {
+        if (v > target_velocity) {
+            v = target_velocity;
         }
     } else {
-        if (v < velocity->target_velocity) {
-            v = velocity->target_velocity;
+        if (v < target_velocity) {
+            v = target_velocity;
         }
     }
 
+    original_target_velocity = target_velocity;
     velocity->target_velocity = v;
-    return velocity_standard_velocity(velocity);
+    return_velocity = velocity_standard_velocity(velocity);
+    velocity->target_velocity = original_target_velocity;
+
+    return return_velocity;
 }

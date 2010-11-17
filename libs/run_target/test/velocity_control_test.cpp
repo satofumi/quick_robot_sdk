@@ -48,7 +48,7 @@ namespace
 
         enum { Print_times = 200, };
         for (size_t i = 0; i < Print_times; ++i) {
-            cout << velocity_standard_velocity(&velocity) << ", ";
+            cout << velocity_standard_velocity(&velocity) << " ";
         }
         cout << endl;
     }
@@ -56,7 +56,29 @@ namespace
 
     void velocity_stop_to_position_test(void)
     {
-        // !!!
+        // 初期化
+        velocity_t velocity;
+        velocity_initialize(&velocity);
+        double left_length = 0;
+
+#if 1
+        // 正の速度からの減速テスト
+        velocity.target_velocity = 300;
+        velocity.current_velocity = 300 << VELOCITY_INTERNAL_SHIFT_WIDTH;
+        velocity.target_acceleration = 300;
+        left_length = 170.0;
+#endif
+
+        enum { Print_times = 170, };
+        for (size_t i = 0; i < Print_times; ++i) {
+            long mm_velocity =
+                velocity_stop_to_position(&velocity,
+                                          static_cast<long>(left_length));
+            cout << static_cast<long>(left_length)
+                 << " " << mm_velocity << endl;
+            left_length -= mm_velocity * CONTROL_CYCLE_MSEC / 1000.0;
+        }
+        cout << endl;
     }
 }
 

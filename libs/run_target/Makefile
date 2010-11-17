@@ -133,7 +133,7 @@ setup_state.o: path_follow.h wheel_velocity.h protocol_handler.h
 setup_state.o: interrupt_priority.h
 std_string.o: std_string.h
 timer_control.o: timer_control.h cpu_clock.h
-velocity_control.o: velocity_control.h velocity_t.h isqrt.h
+velocity_control.o: velocity_control.h velocity_t.h isqrt.h robot_parameter.h
 wheel_velocity.o: wheel_velocity.h wheel_t.h encoder_t.h motor_t.h
 wheel_velocity.o: robot_parameter.h encoder_reader.h motor_velocity.h
 wheel_velocity.o: motor_pwm.h
