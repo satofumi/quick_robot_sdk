@@ -17,8 +17,10 @@ autom4te.cache
 
 config.log
 config.status
+packages/urg_cpp_library/Makefile
 packages/urg_cpp_library/src/Makefile
 packages/urg_cpp_library/sample/Makefile
+packages/urg_cpp_library/urg_cpp-config
 autoscan.log
 Makefile.in
 config.h

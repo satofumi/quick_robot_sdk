@@ -8,7 +8,6 @@ LDFLAGS = `urg_cpp-config --libs` `sdl-config --libs`
 LDLIBS =
 
 TARGET = \
-	direct_path_control \
 
 all : $(TARGET)
 
