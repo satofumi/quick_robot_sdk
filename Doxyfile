@@ -1,14 +1,14 @@
-# Doxyfile 1.7.1
+# Doxyfile 1.7.1-20100920
 
 # This file describes the settings to be used by the documentation system
-# doxygen (www.doxygen.org) for a project
+# doxygen (www.doxygen.org) for a project.
 #
-# All text after a hash (#) is considered a comment and will be ignored
+# All text after a hash (#) is considered a comment and will be ignored.
 # The format is:
 #       TAG = value [value, ...]
 # For lists items can also be appended using:
 #       TAG += value [value, ...]
-# Values that contain spaces should be placed between quotes (" ")
+# Values that contain spaces should be placed between quotes (" ").
 
 #---------------------------------------------------------------------------
 # Project related configuration options
@@ -60,7 +60,7 @@ CREATE_SUBDIRS         = NO
 # Polish, Portuguese, Romanian, Russian, Serbian, Serbian-Cyrilic, Slovak,
 # Slovene, Spanish, Swedish, Ukrainian, and Vietnamese.
 
-OUTPUT_LANGUAGE        = Japanese-en
+OUTPUT_LANGUAGE        = English
 
 # If the BRIEF_MEMBER_DESC tag is set to YES (the default) Doxygen will
 # include brief member descriptions after the members that are listed in
@@ -126,7 +126,7 @@ STRIP_FROM_PATH        =
 STRIP_FROM_INC_PATH    =
 
 # If the SHORT_NAMES tag is set to YES, doxygen will generate much shorter
-# (but less readable) file names. This can be useful is your file systems
+# (but less readable) file names. This can be useful if your file system
 # doesn't support long names like on DOS, Mac, or CD-ROM.
 
 SHORT_NAMES            = NO
@@ -223,7 +223,7 @@ EXTENSION_MAPPING      =
 # to include (a tag file for) the STL sources as input, then you should
 # set this tag to YES in order to let doxygen match functions declarations and
 # definitions whose arguments contain STL classes (e.g. func(std::string); v.s.
-# func(std::string) {}). This also make the inheritance and collaboration
+# func(std::string) {}). This also makes the inheritance and collaboration
 # diagrams that involve STL classes more complete and accurate.
 
 BUILTIN_STL_SUPPORT    = NO
@@ -241,7 +241,7 @@ SIP_SUPPORT            = NO
 
 # For Microsoft's IDL there are propget and propput attributes to indicate getter
 # and setter methods for a property. Setting this option to YES (the default)
-# will make doxygen to replace the get and set methods by a property in the
+# will make doxygen replace the get and set methods by a property in the
 # documentation. This will only work if the methods are indeed getting or
 # setting a simple type. If this is not the case, or you want to show the
 # methods anyway, you should set this option to NO.
@@ -314,7 +314,7 @@ EXTRACT_STATIC         = NO
 # defined locally in source files will be included in the documentation.
 # If set to NO only classes defined in header files are included.
 
-EXTRACT_LOCAL_CLASSES  = NO
+EXTRACT_LOCAL_CLASSES  = YES
 
 # This flag is only useful for Objective-C code. When set to YES local
 # methods, which are defined in the implementation section but not in
@@ -327,7 +327,7 @@ EXTRACT_LOCAL_METHODS  = NO
 # extracted and appear in the documentation as a namespace called
 # 'anonymous_namespace{file}', where file will be replaced with the base
 # name of the file that contains the anonymous namespace. By default
-# anonymous namespace are hidden.
+# anonymous namespaces are hidden.
 
 EXTRACT_ANON_NSPACES   = NO
 
@@ -468,10 +468,10 @@ GENERATE_DEPRECATEDLIST= YES
 ENABLED_SECTIONS       =
 
 # The MAX_INITIALIZER_LINES tag determines the maximum number of lines
-# the initial value of a variable or define consists of for it to appear in
+# the initial value of a variable or macro consists of for it to appear in
 # the documentation. If the initializer consists of more lines than specified
 # here it will be hidden. Use a value of 0 to hide initializers completely.
-# The appearance of the initializer of individual variables and defines in the
+# The appearance of the initializer of individual variables and macros in the
 # documentation can be controlled using \showinitializer or \hideinitializer
 # command in the documentation regardless of this setting.
 
@@ -549,7 +549,7 @@ WARN_IF_UNDOCUMENTED   = YES
 
 WARN_IF_DOC_ERROR      = YES
 
-# This WARN_NO_PARAMDOC option can be abled to get warnings for
+# The WARN_NO_PARAMDOC option can be enabled to get warnings for
 # functions that are documented, but have no documentation for their parameters
 # or return value. If set to NO (the default) doxygen will only warn about
 # wrong or incomplete parameter documentation, but not about the absence of
@@ -581,7 +581,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories
 # with spaces.
 
-INPUT                  = dox libs/run_target/dox libs/run_target libs/run_target/samples libs/run/dox libs/run libs/run/samples libs/lidar programs/run_path_follower/dox programs/run_path_recorder/dox programs/run_wired_controller
+INPUT                  =
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is
@@ -638,7 +638,7 @@ EXCLUDE_SYMBOLS        =
 # directories that contain example code fragments that are included (see
 # the \include command).
 
-EXAMPLE_PATH           = libs/run_target/samples
+EXAMPLE_PATH           =
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp
@@ -658,7 +658,7 @@ EXAMPLE_RECURSIVE      = NO
 # directories that contain image that are included in the documentation (see
 # the \image command).
 
-IMAGE_PATH             = dox/img libs/run_target/dox programs/run_path_recorder/dox programs/run_path_follower/dox
+IMAGE_PATH             =
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -780,7 +780,7 @@ GENERATE_HTML          = YES
 # If a relative path is entered the value of OUTPUT_DIRECTORY will be
 # put in front of it. If left blank `html' will be used as the default path.
 
-HTML_OUTPUT            = generated_html
+HTML_OUTPUT            = html
 
 # The HTML_FILE_EXTENSION tag can be used to specify the file extension for
 # each generated HTML page (for example: .htm,.php,.asp). If it is left blank
@@ -1011,8 +1011,9 @@ ECLIPSE_DOC_ID         = org.doxygen.Project
 
 DISABLE_INDEX          = NO
 
-# This tag can be used to set the number of enum values (range [1..20])
+# This tag can be used to set the number of enum values (range [0,1..20])
 # that doxygen will group on one line in the generated HTML documentation.
+# Note that a value of 0 will completely suppress the enum values from appearing in the overview section.
 
 ENUM_VALUES_PER_LINE   = 4
 
@@ -1085,7 +1086,7 @@ SERVER_BASED_SEARCH    = NO
 # If the GENERATE_LATEX tag is set to YES (the default) Doxygen will
 # generate Latex output.
 
-GENERATE_LATEX         = NO
+GENERATE_LATEX         = YES
 
 # The LATEX_OUTPUT tag is used to specify where the LaTeX docs will be put.
 # If a relative path is entered the value of OUTPUT_DIRECTORY will be
@@ -1114,10 +1115,10 @@ MAKEINDEX_CMD_NAME     = makeindex
 COMPACT_LATEX          = NO
 
 # The PAPER_TYPE tag can be used to set the paper type that is used
-# by the printer. Possible values are: a4, a4wide, letter, legal and
+# by the printer. Possible values are: a4, letter, legal and
 # executive. If left blank a4wide will be used.
 
-PAPER_TYPE             = a4wide
+PAPER_TYPE             = a4
 
 # The EXTRA_PACKAGES tag can be to specify one or more names of LaTeX
 # packages that should be included in the LaTeX output.
@@ -1434,9 +1435,8 @@ PERL_PATH              = /usr/bin/perl
 # If the CLASS_DIAGRAMS tag is set to YES (the default) Doxygen will
 # generate a inheritance diagram (in HTML, RTF and LaTeX) for classes with base
 # or super classes. Setting the tag to NO turns the diagrams off. Note that
-# this option is superseded by the HAVE_DOT option below. This is only a
-# fallback. It is recommended to install and use dot, since it yields more
-# powerful graphs.
+# this option also works with HAVE_DOT disabled, but it is recommended to
+# install and use dot, since it yields more powerful graphs.
 
 CLASS_DIAGRAMS         = YES
 
@@ -1460,7 +1460,7 @@ HIDE_UNDOC_RELATIONS   = YES
 # toolkit from AT&T and Lucent Bell Labs. The other options in this section
 # have no effect if this option is set to NO (the default)
 
-HAVE_DOT               = YES
+HAVE_DOT               = NO
 
 # The DOT_NUM_THREADS specifies the number of dot invocations doxygen is
 # allowed to run in parallel. When set to 0 (the default) doxygen will
@@ -1554,7 +1554,7 @@ CALL_GRAPH             = NO
 CALLER_GRAPH           = NO
 
 # If the GRAPHICAL_HIERARCHY and HAVE_DOT tags are set to YES then doxygen
-# will graphical hierarchy of all classes instead of a textual one.
+# will generate a graphical hierarchy of all classes instead of a textual one.
 
 GRAPHICAL_HIERARCHY    = YES
 
@@ -1566,7 +1566,7 @@ GRAPHICAL_HIERARCHY    = YES
 DIRECTORY_GRAPH        = YES
 
 # The DOT_IMAGE_FORMAT tag can be used to set the image format of the images
-# generated by dot. Possible values are png, jpg, or gif
+# generated by dot. Possible values are png, jpg, or gif.
 # If left blank png will be used.
 
 DOT_IMAGE_FORMAT       = png
@@ -1581,6 +1581,12 @@ DOT_PATH               =
 # \dotfile command).
 
 DOTFILE_DIRS           =
+
+# The MSCFILE_DIRS tag can be used to specify one or more directories that
+# contain msc files that are included in the documentation (see the
+# \mscfile command).
+
+MSCFILE_DIRS           =
 
 # The DOT_GRAPH_MAX_NODES tag can be used to set the maximum number of
 # nodes that will be shown in the graph. If the number of nodes in a graph
