@@ -44,6 +44,7 @@ namespace qrk
         Urg_driver(void);
         ~Urg_driver(void);
 
+
         static std::vector<std::string> find_ports(void);
         static std::vector<std::string> find_ports(std::vector<int>&
                                                    is_urg_ports);
@@ -55,6 +56,8 @@ namespace qrk
                   connection_type_t type = Serial);
         void close(void);
         bool is_open(void) const;
+
+        void reboot(void);
 
 
         // !!! データ取得の開始
@@ -79,7 +82,7 @@ namespace qrk
 
 
         bool set_scanning_parameter(int first_step, int last_step,
-                                    int skip_step = 0);
+                                    int skip_step = 1);
 
 
         // !!! データ取得の中断

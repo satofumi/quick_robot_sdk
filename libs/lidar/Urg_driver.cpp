@@ -111,6 +111,12 @@ bool Urg_driver::is_open(void) const
 }
 
 
+void Urg_driver::reboot(void)
+{
+    urg_reboot(&pimpl->urg_);
+}
+
+
 bool Urg_driver::start_measurement(measurement_type_t type,
                                    int scan_times, int skip_scan)
 {
