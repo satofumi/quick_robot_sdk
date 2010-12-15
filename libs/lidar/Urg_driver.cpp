@@ -87,6 +87,7 @@ const char* Urg_driver::what(void) const
 bool Urg_driver::open(const char* device_name, long baudrate,
                       connection_type_t type)
 {
+    close();
     pimpl->is_opened_ = true;
 
     urg_connection_type_t connection_type =
