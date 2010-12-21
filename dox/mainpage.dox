@@ -1,0 +1,53 @@
+/*!
+  \mainpage 車輪型ロボットとソフトウェアを作るプロジェクト
+
+  !!! 作ったロボットの写真
+
+  \section mainpage_what プロジェクトの特徴
+
+  !!! 何のページかを数行で紹介する。 \n
+  !!! ロボットの作り方、使い方、を紹介する。 \n
+  !!! 作成したソフトウェアの実装の説明を行う。 \n
+
+  - <b>特徴</b>
+    - !!!
+
+  - <b>依存コンポーネント</b>
+    - !!!
+
+  - <b>ライセンス</b>
+    - LGPL (!!! リンク)
+
+  - <b>ダウンロード</b>
+    - !!! 最新のパッケージ
+    - http://github.com/satofumi/quick_robot_sdk/archives/master (過去のバージョン)
+
+
+  \section mainpage_startup スタートアップ・ガイド
+
+  - インストール
+  - チュートリアル
+
+
+  \section mainpage_software_guide プログラミング・ガイド
+
+  - ロボットを移動させる。
+  - 距離センサからのデータを取得する。
+
+
+  \section mainpage_implementation_guide ソフトウェア実装の説明
+
+  - 走行モジュール
+  - 距離センサ・モジュール
+
+
+  \section mainpage_robot ロボットの作り方、入手方法
+
+  - \subpage robot_ugu_page
+  - \subpage robot_beego_page
+
+
+  \section mainpage_report 連絡先
+
+  !!!
+*/
