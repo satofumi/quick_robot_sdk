@@ -88,7 +88,7 @@ bool Urg_driver::open(const char* device_name, long baudrate,
                       connection_type_t type)
 {
     close();
-    pimpl->is_opened_ = true;
+    pimpl->is_opened_ = false;
 
     urg_connection_type_t connection_type =
         (type == Ethernet) ? URG_ETHERNET : URG_SERIAL;
@@ -96,6 +96,8 @@ bool Urg_driver::open(const char* device_name, long baudrate,
     if (ret < 0) {
         return false;
     }
+
+    pimpl->is_opened_ = true;
     return true;
 }
 
@@ -197,7 +199,7 @@ bool Urg_driver::get_distance_intensity(std::vector<long>& data,
 
 
 bool Urg_driver::get_multiecho(std::vector<long>& data_multiecho,
-                                   long* time_stamp)
+                               long* time_stamp)
 {
     if (pimpl->last_measure_type_ != Distance_intensity) {
         pimpl->urg_.last_errno = URG_MEASUREMENT_TYPE_MISMATCH;
