@@ -4,7 +4,7 @@ CC = $(CXX)
 CXXFLAGS = -g -O0 -Wall -Werror $(INCLUDES) `urg_c-config --cflags`
 INCLUDES = -I.. -I../../math -I../../system
 LDFLAGS =
-LDLIBS = `urg_c-config --libs` `sdl-config --libs` -lrt
+LDLIBS = `urg_c-config --libs` -lrt
 
 
 TARGET = \
