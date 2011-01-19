@@ -35,7 +35,9 @@ sensor_parameter
 sync_time_stamp
 calculate_xy
 evaluate_timestamp
-libs/lidar/samples/find_port
+find_port
+output_time_stamp
+
 libs/controller/samples/usb_joystick_view
 programs/run_wired_controller/run_wired_controller
 programs/run_urg_wired_recorder/run_urg_wired_recorder

@@ -51,9 +51,7 @@ Urg_driver::Urg_driver(void) : pimpl(new pImpl)
 
 Urg_driver::~Urg_driver(void)
 {
-    if (pimpl->is_opened_) {
-        close();
-    }
+    close();
 }
 
 
@@ -104,13 +102,29 @@ bool Urg_driver::open(const char* device_name, long baudrate,
 
 void Urg_driver::close(void)
 {
-    urg_close(&pimpl->urg_);
+    if (pimpl->is_opened_) {
+        urg_close(&pimpl->urg_);
+    }
 }
 
 
 bool Urg_driver::is_open(void) const
 {
     return pimpl->is_opened_;
+}
+
+
+bool Urg_driver::laser_on(void)
+{
+    int ret = urg_laser_on(&pimpl->urg_);
+    return (ret < 0) ? false : true;
+}
+
+
+bool Urg_driver::laser_off(void)
+{
+    int ret = urg_laser_off(&pimpl->urg_);
+    return (ret < 0) ? false : true;
 }
 
 
@@ -141,15 +155,13 @@ bool Urg_driver::start_measurement(measurement_type_t type,
         if (type == p->type) {
             int ret = urg_start_measurement(&pimpl->urg_,
                                             p->c_type, scan_times, skip_scan);
-            if (ret < 0) {
-                return false;
-            } else {
+            if (ret == URG_NO_ERROR) {
                 pimpl->last_measure_type_ = type;
-                return true;
             }
-            return (ret < 0) ? false : true;
+            return (ret == URG_NO_ERROR) ? true : false;
         }
     }
+
     return false;
 }
 

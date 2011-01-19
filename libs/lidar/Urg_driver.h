@@ -57,7 +57,15 @@ namespace qrk
         void close(void);
         bool is_open(void) const;
 
+        bool laser_on(void);
+        bool laser_off(void);
+
         void reboot(void);
+
+
+        // !!! void sleep(void);
+        // !!! void wakeup(void);
+        // !!! bool is_stable(void);
 
 
         // !!! データ取得の開始
@@ -72,8 +80,10 @@ namespace qrk
                                     std::vector<unsigned short>& intensity,
                                     long *time_stamp = NULL);
 
+
         bool get_multiecho(std::vector<long>& data_multi,
                            long* time_stamp = NULL);
+
 
         bool get_multiecho_intensity(std::vector<long>& data_multiecho,
                                      std::vector<unsigned short>&
@@ -91,6 +101,7 @@ namespace qrk
 
         // !!! タイムスタンプの同期
         bool set_sensor_time_stamp(long time_stamp);
+
 
         // !!! 角度変換
         double index2rad(int index) const;
@@ -119,6 +130,7 @@ namespace qrk
         int raw_write(const char* data, size_t data_size);
         int raw_read(char* data, size_t max_data_size, int timeout);
         int raw_readline(char* data, size_t max_data_size, int timeout);
+
 
     private:
         Urg_driver(const Urg_driver& rhs);

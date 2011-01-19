@@ -17,6 +17,8 @@ TARGET = \
 	sync_time_stamp \
 	evaluate_timestamp \
 	find_port \
+	\
+	output_time_stamp \
 
 all : $(TARGET)
 
