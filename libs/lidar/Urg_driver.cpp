@@ -213,7 +213,7 @@ bool Urg_driver::get_distance_intensity(std::vector<long>& data,
 bool Urg_driver::get_multiecho(std::vector<long>& data_multiecho,
                                long* time_stamp)
 {
-    if (pimpl->last_measure_type_ != Distance_intensity) {
+    if (pimpl->last_measure_type_ != Multiecho) {
         pimpl->urg_.last_errno = URG_MEASUREMENT_TYPE_MISMATCH;
         return false;
     }
@@ -237,7 +237,7 @@ bool Urg_driver::get_multiecho_intensity(std::vector<long>& data_multiecho,
                                          intensity_multiecho,
                                          long* time_stamp)
 {
-    if (pimpl->last_measure_type_ != Distance_intensity) {
+    if (pimpl->last_measure_type_ != Multiecho_intensity) {
         pimpl->urg_.last_errno = URG_MEASUREMENT_TYPE_MISMATCH;
         return false;
     }

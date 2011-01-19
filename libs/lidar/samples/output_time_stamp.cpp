@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
         long time_stamp = 0;
 
         if (!urg.get_multiecho_intensity(data, intensity, &time_stamp)) {
-            cout << "Urg_driver::get_distance(): " << urg.what() << endl;
+            cout << "Urg_driver::get_multiecho_intensity(): " << urg.what() << endl;
             return 1;
         }
 
