@@ -57,6 +57,8 @@ namespace qrk
         void close(void);
         bool is_open(void) const;
 
+        void set_timeout_msec(int msec);
+
         bool laser_on(void);
         bool laser_off(void);
 

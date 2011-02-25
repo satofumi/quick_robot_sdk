@@ -114,6 +114,12 @@ bool Urg_driver::is_open(void) const
 }
 
 
+void Urg_driver::set_timeout_msec(int msec)
+{
+    urg_set_timeout_msec(&pimpl->urg_, msec);
+}
+
+
 bool Urg_driver::laser_on(void)
 {
     int ret = urg_laser_on(&pimpl->urg_);
