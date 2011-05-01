@@ -27,7 +27,3 @@ $(REQUIRE_LIBS) :
 $(TARGET) : $(REQUIRE_LIBS)
 
 # DO NOT DELETE
-
-direct_path_control.o: ../Run_driver.h ../../geometry/Position.h
-direct_path_control.o: ../../geometry/Angle.h ../../geometry/Point.h
-direct_path_control.o: ../../lidar/Urg_driver.h

@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
     }
 
     //urg.start_measurement(Urg_driver::Multiecho_intensity,
-    urg.start_measurement(Urg_driver::Distance_intensity,
-                          //urg.start_measurement(Urg_driver::Distance,
+    //urg.start_measurement(Urg_driver::Distance_intensity,
+    urg.start_measurement(Urg_driver::Distance,
                           Urg_driver::Infinity_times);
 
     long pre_time_stamp = 0;
@@ -42,7 +42,8 @@ int main(int argc, char *argv[])
         long time_stamp = 0;
 
         //if (!urg.get_multiecho_intensity(data, intensity, &time_stamp)) {
-        if (!urg.get_distance_intensity(data, intensity, &time_stamp)) {
+        //if (!urg.get_distance_intensity(data, intensity, &time_stamp)) {
+        if (!urg.get_distance(data, &time_stamp)) {
             //if (!urg.get_distance(data, &time_stamp)) {
             cout << "Urg_driver::get_distance_intensity(): " << urg.what() << endl;
             return 1;

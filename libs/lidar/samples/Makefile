@@ -45,5 +45,6 @@ get_distance.o: Connection_information.h
 get_distance_intensity.o: Connection_information.h
 get_multiecho.o: Connection_information.h
 get_multiecho_intensity.o: Connection_information.h
+output_time_stamp.o: Connection_information.h
 sensor_parameter.o: Connection_information.h
 sync_time_stamp.o: Connection_information.h

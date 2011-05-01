@@ -22,7 +22,7 @@ namespace qrk
         Connection_information(int argc, const char*const argv[]);
         ~Connection_information(void);
 
-        Urg_driver::connection_type_t connection_type() const;
+        Lidar::connection_type_t connection_type() const;
         const char* device_or_ip_name(void) const;
         long baudrate_or_port_number(void) const;
 

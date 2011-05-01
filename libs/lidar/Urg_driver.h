@@ -12,28 +12,14 @@
 
 #include <memory>
 #include <string>
-#include <vector>
+#include "Lidar.h"
 
 
 namespace qrk
 {
-    class Urg_driver
+    class Urg_driver : public Lidar
     {
     public:
-        typedef enum {
-            Distance,               /*!< 距離 */
-            Distance_intensity,     /*!< 距離 + 強度 */
-            Multiecho,              /*!< マルチエコーの距離 */
-            Multiecho_intensity,    /*!< マルチエコーの(距離 + 強度) */
-        } measurement_type_t;
-
-
-        typedef enum {
-            Serial,
-            Ethernet,
-        } connection_type_t;
-
-
         enum {
             Default_baudrate = 115200,
             Default_port = 10940,
@@ -42,7 +28,7 @@ namespace qrk
 
 
         Urg_driver(void);
-        ~Urg_driver(void);
+        virtual ~Urg_driver(void);
 
 
         static std::vector<std::string> find_ports(void);
@@ -65,9 +51,9 @@ namespace qrk
         void reboot(void);
 
 
-        // !!! void sleep(void);
-        // !!! void wakeup(void);
-        // !!! bool is_stable(void);
+        void sleep(void);
+        void wakeup(void);
+        bool is_stable(void);
 
 
         // !!! データ取得の開始
@@ -141,6 +127,6 @@ namespace qrk
         struct pImpl;
         std::auto_ptr<pImpl> pimpl;
     };
-};
+}
 
 #endif /* !QRK_URG_DRIVER_H */

@@ -9,6 +9,7 @@ LIDAR_LIB = liblidar.a
 TARGET = $(LIDAR_LIB)
 
 all : $(TARGET)
+	cd samples/ && $(MAKE)
 
 clean :
 	$(RM) $(TARGET) *.o
@@ -24,4 +25,5 @@ $(LIDAR_LIB) : \
 
 # DO NOT DELETE
 
-Urg_driver.o: Urg_driver.h
+Urg_driver.o: Lidar.h
+Urg_driver.o: Urg_driver.h Lidar.h

@@ -140,6 +140,24 @@ void Urg_driver::reboot(void)
 }
 
 
+void Urg_driver::sleep(void)
+{
+    urg_sleep(&pimpl->urg_);
+}
+
+
+void Urg_driver::wakeup(void)
+{
+    urg_wakeup(&pimpl->urg_);
+}
+
+
+bool Urg_driver::is_stable(void)
+{
+    return urg_is_stable(&pimpl->urg_) ? true : false;
+}
+
+
 bool Urg_driver::start_measurement(measurement_type_t type,
                                    int scan_times, int skip_scan)
 {
