@@ -15,7 +15,6 @@ extern "C" {
 #include "urg_serial_utils.h"
 #include "urg_errno.h"
 }
-#include <cstdio>
 
 using namespace qrk;
 using namespace std;
@@ -493,4 +492,16 @@ int Urg_driver::raw_read(char* data, size_t max_data_size, int timeout)
 int Urg_driver::raw_readline(char* data, size_t max_data_size, int timeout)
 {
     return urg_raw_readline(&pimpl->urg_, data, max_data_size, timeout);
+}
+
+
+void* Urg_driver::raw_urg(void)
+{
+    return (void*)&pimpl->urg_;
+}
+
+
+void Urg_driver::set_measurement_type(measurement_type_t type)
+{
+    pimpl->last_measure_type_ = type;
 }

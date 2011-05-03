@@ -26,12 +26,10 @@ namespace qrk
             Multiecho_intensity, /*!< マルチエコーの(距離 + 強度) */
         } measurement_type_t;
 
-
         typedef enum {
             Serial,
             Ethernet,
         } connection_type_t;
-
 
         virtual ~Lidar(void)
         {
@@ -39,7 +37,6 @@ namespace qrk
 
 
         virtual const char* what(void) const = 0;
-
 
         virtual bool open(const char* device_name, long baudrate,
                           connection_type_t type) = 0;
@@ -53,16 +50,13 @@ namespace qrk
 
         virtual void reboot(void) = 0;
 
-
         virtual void sleep(void) = 0;
         virtual void wakeup(void) = 0;
         virtual bool is_stable(void) = 0;
 
-
         // !!! データ取得の開始
         virtual bool start_measurement(measurement_type_t type,
                                        int scan_times, int skip_scan) = 0;
-
 
         // !!! 受信データの受け取り
         virtual bool get_distance(std::vector<long>& data,
@@ -72,28 +66,22 @@ namespace qrk
                                             intensity,
                                             long *time_stamp) = 0;
 
-
         virtual bool get_multiecho(std::vector<long>& data_multi,
                                    long* time_stamp) = 0;
-
 
         virtual bool get_multiecho_intensity(std::vector<long>& data_multiecho,
                                              std::vector<unsigned short>&
                                              intensity_multiecho,
                                              long* time_stamp) = 0;
 
-
         virtual bool set_scanning_parameter(int first_step, int last_step,
                                             int skip_step) = 0;
-
 
         // !!! データ取得の中断
         virtual void stop_measurement(void) = 0;
 
-
         // !!! タイムスタンプの同期
         virtual bool set_sensor_time_stamp(long time_stamp) = 0;
-
 
         // !!! 角度変換
         virtual double index2rad(int index) const = 0;
