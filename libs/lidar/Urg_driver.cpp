@@ -103,6 +103,7 @@ void Urg_driver::close(void)
 {
     if (pimpl->is_opened_) {
         urg_close(&pimpl->urg_);
+        pimpl->is_opened_ = false;
     }
 }
 

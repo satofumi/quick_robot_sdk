@@ -35,7 +35,6 @@ namespace qrk
         {
         }
 
-
         virtual const char* what(void) const = 0;
 
         virtual bool open(const char* device_name, long baudrate,

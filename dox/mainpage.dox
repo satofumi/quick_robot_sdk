@@ -15,7 +15,7 @@
     - !!!
 
   - <b>ライセンス</b>
-    - LGPL (!!! リンク)
+    - LGPL (<a href="COPYING">plain text</a>)
 
   - <b>ダウンロード</b>
     - 最新のパッケージ (安定版)
@@ -32,8 +32,8 @@
 
   \section mainpage_software_guide プログラミング・ガイド
 
-  - ロボットを移動させる。
-  - 距離センサからのデータを取得する。
+  - ロボットを移動させる
+  - 距離センサからのデータを取得する
 
 
   \section mainpage_implementation_guide ソフトウェア実装の説明
@@ -42,13 +42,13 @@
   - 距離センサ・モジュール
 
 
-  \section mainpage_robot ロボットの作り方、入手方法
+  \section mainpage_robot ロボットの整備、入手方法
 
-  - \subpage robot_ugu_page
-  - \subpage robot_beego_page
+  - ルンバにセンサを搭載して使う
+  - ロボットを自作する
 
 
   \section mainpage_report 連絡先
 
-  !!!
+  - satofumi@users.sourceforge.jp
 */
