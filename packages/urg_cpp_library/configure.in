@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.61)
 
-AC_INIT(urg_cpp, 0.0.1, satofumi@users.sourceforge.jp)
+AC_INIT(urg_cpp, 0.0.2, satofumi@users.sourceforge.jp)
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/Urg_driver.cpp])
 AM_CONFIG_HEADER([config.h])
@@ -30,9 +30,9 @@ LT_INIT
 #AC_PROG_RANLIB
 
 # Checks for libraries.
-#LIBS="$LIBS -lurg_cpp"
+LIBS="$LIBS -lurg_cpp"
 AC_CHECK_LIB(rt, clock_gettime, [LIBS="$LIBS -lrt"], AC_MSG_NOTICE([*** rt library not found! ***]))
-AC_CHECK_LIB(urg_c, urg_open, [HAVE_LIBURG_C="yes"], AC_MSG_ERROR([*** urg_c not found! ***]))
+#AC_CHECK_LIB(urg_c, urg_open, [HAVE_LIBURG_C="yes"], AC_MSG_ERROR([*** urg_c not found! ***]))
 # !!! todo added urg_c-config check
 CXXFLAGS="$CXXFLAGS `urg_c-config --cflags`"
 CFLAGS="$CFLAGS `urg_c-config --cflags`"
