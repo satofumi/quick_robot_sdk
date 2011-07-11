@@ -39,7 +39,8 @@ struct Connection_information::pImpl
     void set_ethernet_connection(void)
     {
         connection_type_ = Urg_driver::Ethernet;
-        device_or_ip_name_ = "192.168.0.10";
+        device_or_ip_name_ = "localhost";
+        //device_or_ip_name_ = "192.168.0.10";
         baudrate_or_port_number_ = 10940;
     }
 };

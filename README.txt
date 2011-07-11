@@ -1,16 +1,17 @@
 Quick robot sdk
 
-== これは何？ ==
-車輪型移動ロボット用のソフトウェアライブラリです。
+
+= Abstract
+Quick robot sdk is the software library for robots.
 
 
-== ライセンス ==
+= License
 LGPL
 
 
-== インストール ==
-INSTALL.txt をご覧下さい。
+= How to install
+see INSTALL.txt
 
 
-== 連絡先 ==
+= report
 satofumi@users.sourceforge.jp

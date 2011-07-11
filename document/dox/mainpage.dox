@@ -45,6 +45,7 @@
 
   \section mainpage_implementation_guide ソフトウェア実装の説明
 
+  - \subpage about_coordinate_page
   - 走行モジュール
   - 距離センサ・モジュール
 

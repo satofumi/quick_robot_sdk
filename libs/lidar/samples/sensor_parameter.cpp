@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
     cout << "Sensor firmware version: " << urg.firmware_version() << endl;
     cout << "Sensor serial ID: " << urg.serial_id() << endl;
     cout << "Sensor status: " << urg.status() << endl;
+    cout << "Sensor state: " << urg.state() << endl;
 
     cout << "step: ["
          << urg.min_step() << ", "

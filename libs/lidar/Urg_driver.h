@@ -17,6 +17,7 @@
 
 namespace qrk
 {
+    //! URG ドライバ
     class Urg_driver : public Lidar
     {
     public:
@@ -101,6 +102,7 @@ namespace qrk
         const char* firmware_version(void) const;
         const char* serial_id(void) const;
         const char* status(void) const;
+        const char* state(void) const;
 
         int raw_write(const char* data, size_t data_size);
         int raw_read(char* data, size_t max_data_size, int timeout);

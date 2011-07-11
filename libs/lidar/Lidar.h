@@ -3,7 +3,7 @@
 
 /*!
   \file
-  \brief URG ドライバ
+  \brief Lidar インターフェース
 
   \author Satofumi KAMIMURA
 
@@ -16,6 +16,7 @@
 
 namespace qrk
 {
+    //! Lidar インターフェース
     class Lidar
     {
     public:
@@ -105,6 +106,7 @@ namespace qrk
         virtual const char* firmware_version(void) const = 0;
         virtual const char* serial_id(void) const = 0;
         virtual const char* status(void) const = 0;
+        virtual const char* state(void) const = 0;
 
         virtual int raw_write(const char* data, size_t data_size) = 0;
         virtual int raw_read(char* data, size_t max_data_size, int timeout) = 0;

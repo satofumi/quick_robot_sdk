@@ -14,6 +14,7 @@ extern "C" {
 #include "urg_utils.h"
 #include "urg_serial_utils.h"
 #include "urg_errno.h"
+#include "urg_debug.h"
 }
 
 using namespace qrk;
@@ -26,6 +27,12 @@ struct Urg_driver::pImpl
     bool is_opened_;
     measurement_type_t last_measure_type_;
     long time_stamp_offset_;
+
+    string product_type_;
+    string firmware_version_;
+    string serial_id_;
+    string status_;
+    string state_;
 
 
     pImpl(void)
@@ -86,6 +93,9 @@ bool Urg_driver::open(const char* device_name, long baudrate,
 {
     close();
     pimpl->is_opened_ = false;
+    pimpl->product_type_.clear();
+    pimpl->firmware_version_.clear();
+    pimpl->serial_id_.clear();
 
     urg_connection_type_t connection_type =
         (type == Ethernet) ? URG_ETHERNET : URG_SERIAL;
@@ -456,25 +466,42 @@ int Urg_driver::max_echo_size(void) const
 
 const char* Urg_driver::product_type(void) const
 {
-    return urg_sensor_product_type(&pimpl->urg_);
+    if (pimpl->product_type_.empty()) {
+        pimpl->product_type_ = urg_sensor_product_type(&pimpl->urg_);
+    }
+    return pimpl->product_type_.c_str();
 }
 
 
 const char* Urg_driver::firmware_version(void) const
 {
-    return urg_sensor_firmware_version(&pimpl->urg_);
+    if (pimpl->firmware_version_.empty()) {
+        pimpl->firmware_version_ = urg_sensor_firmware_version(&pimpl->urg_);
+    }
+    return pimpl->firmware_version_.c_str();
 }
 
 
 const char* Urg_driver::serial_id(void) const
 {
-    return urg_sensor_serial_id(&pimpl->urg_);
+    if (pimpl->serial_id_.empty()) {
+        pimpl->serial_id_ = urg_sensor_serial_id(&pimpl->urg_);
+    }
+    return pimpl->serial_id_.c_str();
 }
 
 
 const char* Urg_driver::status(void) const
 {
-    return urg_sensor_status(&pimpl->urg_);
+    pimpl->status_ = urg_sensor_status(&pimpl->urg_);
+    return pimpl->status_.c_str();
+}
+
+
+const char* Urg_driver::state(void) const
+{
+    pimpl->state_ = urg_sensor_state(&pimpl->urg_);
+    return pimpl->state_.c_str();
 }
 
 
